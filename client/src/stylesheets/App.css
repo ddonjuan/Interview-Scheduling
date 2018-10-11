@@ -1,0 +1,65 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+}
+.login, .signup{
+  display: block;
+  margin: 0 auto;
+  margin-top: 3%;
+}
+.interviewer-signup{
+  margin-top: 5%;
+  border: 1px solid black;
+
+}
+.in{
+  margin-left: none;
+  margin: 0 auto;
+  margin-top: 4%;
+  float: none !important;
+}
+.in h5{
+  display: inline-block;
+  margin-right: 3%;
+}
+.submit-b{
+  display: flex;
+  margin: 0 auto;
+  margin-top: 5%;
+
+}
+.drop-down-button{
+  height: 40px;
+  width: 62px;
+}
+.icon-display , ion-icon{
+  display: flex;
+  align-content: center;
+  width: 30px;
+  height: 30px;
+}
+.drop-down-list{
+  display: none;
+  left: 42%;
+  top: 53%;
+  width: 15%;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.drop-down-list li{
+  font-size: 1.4em;
+  padding: 1%;
+}
+.drop-down-list li:hover{
+  background-color: rgba(41, 41, 41, 0.8)
+}
+.visible{
+  display:block;
+}
+.info-button{
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10%;
+}
