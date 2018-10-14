@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class InterviwerSignup extends Component {
     constructor(props) {
@@ -42,8 +43,9 @@ class InterviwerSignup extends Component {
                                 <label for="interviewer-confirm-password" className="active">Confirm Password</label>
                             </div>
                         </div>
-                        <button className="btn waves-effect waves-light center submit-b" type="submit" name="action">Submit</button>
+                        <Link to="/interviewer-info" className="btn waves-effect waves-light center submit-b" type="submit" name="action">Create Account</Link>
                     </form>
+                    
                 </div>
             </div>
         )

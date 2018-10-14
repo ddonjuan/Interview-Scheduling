@@ -9,14 +9,18 @@ import '../stylesheets/App.css';
 import InterviewerLandingPage from './interviewer-landing-page';
 
 class App extends Component {
+
   render() {
 
     return (
       <div className="app">
-        <h1 className='center'>Allocate Rx</h1>
-        {/* <InterviewerLandingPage/> */}
-        {/* <InterviewerSignup/> */}
-        <InterviewerInfo/>
+        <header className="card-panel blue lighten-1 header">
+          <h1 className='left'>Allergan Rx</h1>
+        </header>
+        <Route exact path="/" component={InterviewerLandingPage} />
+        <Route path="/interviewer-login" component={InterviewerLogin} />
+        <Route path="/interviewer-signup" component={InterviewerSignup} />
+        <Route path="/interviewer-info" component={InterviewerInfo} />
       </div>
     );
 
