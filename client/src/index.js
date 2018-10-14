@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import './index.css';
 import App from './components/App';
 import 'materialize-css/dist/css/materialize.min.css';
 import * as serviceWorker from './serviceWorker';
+export const history = createHistory();
+
 
 ReactDOM.render(
-    <Router>
+    <Router history={history}>
         <App />
     </Router>,
     document.getElementById('root')
