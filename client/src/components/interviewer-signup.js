@@ -43,7 +43,7 @@ class InterviwerSignup extends Component {
                                 <label for="interviewer-confirm-password" className="active">Confirm Password</label>
                             </div>
                         </div>
-                        <Link to="/interviewer-info" className="btn waves-effect waves-light center submit-b" type="submit" name="action">Create Account</Link>
+                        <Link to="/interviewer-info" className="btn waves-effect waves-teal btn-large submit-b" >Create Account</Link>
                     </form>
                     
                 </div>
