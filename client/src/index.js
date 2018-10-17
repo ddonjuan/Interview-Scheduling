@@ -10,7 +10,7 @@ export const history = createHistory();
 
 
 ReactDOM.render(
-    <Router history={history}>
+    <Router history={createHistory}>
         <App />
     </Router>,
     document.getElementById('root')

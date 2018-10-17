@@ -12,7 +12,7 @@ export default (props) => {
 
                 <div className="modal-footer-custom">
                     <button onClick={()=>{showElement(`${props.id}`)}} className="waves-effect waves-light red btn">Cancel</button>
-                    <button onClick={()=>{props.redirect()}} className="waves-effect waves-light btn">Confirm</button>
+                    <button onClick={()=>{props.submit()}}className="waves-effect waves-light btn">Confirm</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import {handleInput} from './helpers/handle-input-helper';
 
 
@@ -23,6 +24,8 @@ class InterviewerLogin extends Component {
         console.log("this is the state when submitted: ", this.state);
     }
     render() {
+        console.log("props in the login component: ", this.props);
+        const {switchNav} = this.props;
         const {userName, password} = this.state;
         console.log("this is the state afterwards: ", this.state);
         return (
@@ -41,7 +44,7 @@ class InterviewerLogin extends Component {
                                 <label for="interviwer-password" className="active">Password</label>
                             </div>
                         </div>
-                        <button className="waves-effect waves-teal btn-large login-submit">Log In</button>
+                        <Link to="/interviewer-homepage" onClick={()=>{switchNav()}}className="waves-effect waves-teal btn-large login-submit">Log In</Link>
                     </form>
                 </div>
             </div>

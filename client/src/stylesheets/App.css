@@ -10,18 +10,23 @@
 }
 .header h1{
   margin-top: 0%;
+  font-size: 3.2em;
+}
+.login-button-container{
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  margin-top: 15%;
 }
 .login, .signup{
   display: block;
   width: 25%;
   margin: 0 auto;
   margin-top: 3%;
-  font-weight: 600;
+  font-weight: 700;
 }
 .interviewer-signup{
   margin-top: 5%;
-  border: 1px solid black;
-
 }
 .in{
   margin-left: none;
@@ -36,7 +41,9 @@
 .submit-b{
   display: flex;
   margin: 0 auto;
+  width: 25%;
   margin-top: 5%;
+  text-align-last: center;
 
 }
 .drop-down-button{
@@ -104,4 +111,82 @@
 }
 .modal-footer-custom button{
   margin: 2%;
+}
+
+/* Nav Logo */
+
+.home-nav-logo{
+  font-size: 3.2em;
+}
+.icon{
+  display: inline-block;
+}
+.nav-items{
+  margin-top: 2%;
+}
+.nav-items li:not(:last-child){
+  border-right: 2px solid black;
+}
+
+.home-container{
+  /* border: 1px solid black; */
+  height: 85%;
+  width: 100%;
+}
+.home-inner-container{
+  /* border: 1px solid black; */
+  height: 95%;
+  width: 97%;
+  margin: 0 auto;
+  margin-top: 1.2%;
+}
+/* .home-info-container{
+  padding:
+} */
+.sort-name-option, .sort-function-option, .sort-status-option{
+  width: 10%;
+}
+.sort-name-option{
+  display: inline-block;
+}
+.sort-function-option{
+  display: inline-block;
+}
+.names-container, .info-container{
+  border: 1px solid black;
+  height: 70vh;
+  overflow-y: scroll;
+}
+.info-container{
+  border-left: none;
+}
+.names-container{
+  padding: 0 !important;
+
+}
+.names{
+  border: 1px solid black;
+  height: 20%;
+  font-size: 1.4em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.names:hover{
+  background-color: rgba(0,0,0,.4);
+}
+.info-header{
+  border: 1px solid black;
+  margin-bottom: 0;
+}
+.name-school h6{
+  margin: 0;
+}
+.pic-class{
+  height: 160px;
+  width: 160px;
+}
+.essay *{
+  margin: 4%;
 }

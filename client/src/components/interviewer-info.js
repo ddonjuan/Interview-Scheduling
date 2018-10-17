@@ -13,6 +13,7 @@ class InterviewerInfo extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectOption = this.handleSelectOption.bind(this);
+        this.doesThisWork = this.doesThisWork.bind(this);
     }
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -27,12 +28,18 @@ class InterviewerInfo extends Component {
             department: event.target.value
         })
     }
+    doesThisWork(){
+        console.log("It works!");
+        this.props.history.push("/interviewer-login");
+    }
     render() {
+        console.log("this should be the history: ", this.props);
         const {firstName, lastName, department} = this.state;
             
         return (
             <div className="container">
-                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} redirect={redirectLogin}/>
+                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} submit={this.doesThisWork}/>
+                <h4 className="center">Enter Information</h4>
                 <div className="row in">
                     <div class="input-field col s6 in">
                         <input onChange={this.handleInputChange} name="firstName" id="interviewer-first-name" type="text" className="validate" />
