@@ -178,7 +178,15 @@
 }
 .info-header{
   border: 1px solid black;
+  margin-bottom: 0;
 }
 .name-school h6{
   margin: 0;
+}
+.pic-class{
+  height: 160px;
+  width: 160px;
+}
+.essay *{
+  margin: 4%;
 }

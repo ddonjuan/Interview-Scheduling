@@ -49,15 +49,21 @@ class InterviewerHomePage extends Component {
                             <div className="col s8 info-container">
                                 <div className="row info-header">
                                     <div className="col s12">
-                                        <div className="col s3 pic"><img src={dummyData[0].img} alt=""/></div>
+                                        <div className="col s3 pic"><img className="pic-class"src={dummyData[0].img} alt=""/></div>
                                         <div className="col s1 name-school">
-                                            <h6>Daniel Donjuan</h6>
-                                            <h6>Cal State Fullerton</h6>
+                                            <span>Daniel Donjuan</span>
+                                            <span>Cal State Fullerton</span>
                                         </div>
                                         <div className="col s2 right status-display">Status</div>
                                     </div>
                                 </div>
                                 <div className="divider"></div>
+                                <div className="row essay">
+                                    <span>Essay 1: </span><p>{dummyData[0].essay1}</p>
+                                </div>
+                                <div className="row essay">
+                                    <span>Essay 2: </span><p>{dummyData[0].essay1}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
