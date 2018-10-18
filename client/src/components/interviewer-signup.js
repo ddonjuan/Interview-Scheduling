@@ -18,19 +18,6 @@ class InterviwerSignup extends Component {
                                 <label for="interviewer-first-name" className="active">First Name</label>
                             </div>
                         </div>
-                        {/* <div className="row in">
-                            <div class="input-field col s6 in">
-                                <input id="interviewer-last-name" type="text" className="validate" />
-                                <label for="interviewer-last-name" className="active">Last Name</label>
-                            </div>
-                        </div>
-
-                        <div className="row in">
-                            <div className="input-field col s6 in">
-                                <input id="interviewer-email" type="email" className="validate" />
-                                <label for="interviewer-email" className="active">Email</label>
-                            </div>
-                        </div> */}
                         <div className="row in">
                             <div className="input-field col s6 in">
                                 <input id="interviewer-password" type="password" className="validate" />
