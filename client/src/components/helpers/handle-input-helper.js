@@ -6,3 +6,4 @@ export function showElement(elementClass){
 export function redirectLogin(){
     this.props.history.push("/interviewer-login");
 }
+

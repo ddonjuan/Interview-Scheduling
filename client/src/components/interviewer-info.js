@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { showElement, redirectLogin } from './helpers/handle-input-helper';
+import { showElement, redirectLogin, handleSelectElement } from './helpers/handle-input-helper';
 import Modal from './helpers/modal';
+import SelectDropDown from './helpers/select-element';
 
 
 class InterviewerInfo extends Component {
@@ -13,7 +14,7 @@ class InterviewerInfo extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectOption = this.handleSelectOption.bind(this);
-        this.doesThisWork = this.doesThisWork.bind(this);
+        this.redirectToLogin = this.redirectToLogin.bind(this);
     }
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -23,22 +24,22 @@ class InterviewerInfo extends Component {
 
     }
     handleSelectOption(event) {
-        console.log("event: ", event);
         this.setState({
             department: event.target.value
         })
     }
-    doesThisWork(){
-        console.log("It works!");
+
+    redirectToLogin(){
         this.props.history.push("/interviewer-login");
     }
+
     render() {
-        console.log("this should be the history: ", this.props);
+        console.log("this is the state in info: ", this.state);
         const {firstName, lastName, department} = this.state;
             
         return (
             <div className="container">
-                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} submit={this.doesThisWork}/>
+                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} submit={this.redirectToLogin}/>
                 <h4 className="center">Enter Information</h4>
                 <div className="row in">
                     <div class="input-field col s6 in">
@@ -56,12 +57,13 @@ class InterviewerInfo extends Component {
                 <div className="row drop-down-container">
                     <div className="col s6 in">
                         <label>Function</label>
-                        <select onChange={this.handleSelectOption} class="browser-default" ref="function">
+                        <SelectDropDown id="initial-function" selectTitle="Function" submit={this.handleSelectOption} value={['4', '5', '6']}/>
+                        {/* <select onChange={this.handleSelectOption} className="browser-default" ref="function">
                             <option value="" disabled selected>Choose your department</option>
                             <option value="1">Option 1</option>
                             <option value="2">Option 2</option>
                             <option value="3">Option 3</option>
-                        </select>
+                        </select> */}
                     </div>
                 </div>
                 <button onClick={() => showElement("1")} className="waves-effect waves-dark btn-large modal-trigger info-button">Save</button>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SelectDropDown from './helpers/select-element';
 import dummyData from './dummy-data';
 
 class InterviewerHomePage extends Component {
@@ -19,25 +20,9 @@ class InterviewerHomePage extends Component {
                 <div className="row home-inner-container">
                     <div className="section">
                         <div className="col s12 inner-header">
-                            <select onChange={this.handleSelectOption} class="browser-default col s2 sort-name-option" ref="function">
-                                <option value="" disabled selected>Alphabetize</option>
-                                <option value="1">A-Z</option>
-                                <option value="2">Z-A</option>
-                            </select>
-                            <select onChange={this.handleSelectOption} class="browser-default col s2 sort-function-option" ref="function">
-                                <option value="" disabled selected>Function</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Python</option>
-                                <option value="3">Drix</option>
-                                <option value="4">Lease</option>
-                                <option value="5">Strict</option>
-                            </select>
-                            <select onChange={this.handleSelectOption} class="browser-default col s2 sort-status-option" ref="function">
-                                <option value="" disabled selected>Status</option>
-                                <option value="1">Pending</option>
-                                <option value="2">Accepted</option>
-                                <option value="2">Rejected</option>
-                            </select>
+                            <SelectDropDown id="sort" selectTitle="Alphabatize" value={['A-Z', 'Z-A']} selectClasses="col s2 sort-name-option"/>
+                            <SelectDropDown id="function-list" selectTitle="Function" value={['Chems', 'Test', 'Prep', 'Janitor']} selectClasses="col s2 sort-function-option"/>
+                            <SelectDropDown id="status" selectTitle="Status" value={['Pending', 'Accepted', 'Rejected']} selectClasses="col s2 sort-status-option"/>
                             <div className="col s2 right count">
                                 <h6>Count: {dummyData.length}</h6>
                             </div>
