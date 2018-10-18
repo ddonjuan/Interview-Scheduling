@@ -5,6 +5,7 @@ export default [
         firstName: 'Daniel',
         lastName: 'Donjuan',
         school: 'Cal State Fullerton',
+        function: 'Chems',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -15,6 +16,7 @@ export default [
         firstName: 'Harrison',
         lastName: 'Chen',
         school: 'UCLA',
+        function: 'Test',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -25,6 +27,7 @@ export default [
         firstName: 'Corey',
         lastName: 'Coleman',
         school: 'UCI',
+        function: 'Prep',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -35,6 +38,7 @@ export default [
         firstName: 'Keith',
         lastName: 'Silcock',
         school: 'Ohio State University',
+        function: 'Janitor',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -45,6 +49,7 @@ export default [
         firstName: 'Olga',
         lastName: 'Pitaki',
         school: 'UCI',
+        function: 'Prep',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -55,6 +60,7 @@ export default [
         firstName: 'Harry',
         lastName: 'Potter',
         school: 'Hogwarts',
+        function: 'Chems',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -65,6 +71,7 @@ export default [
         firstName: 'Phillip',
         lastName: 'Sherman',
         school: 'MIT',
+        function: 'Test',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -75,6 +82,7 @@ export default [
         firstName: 'Pheobe',
         lastName: 'Nguyen',
         school: 'New York University',
+        function: 'Janitor',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -85,6 +93,7 @@ export default [
         firstName: 'Kevin',
         lastName: 'Pham',
         school: 'Cal State Fullerton',
+        function: 'Chems',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'
@@ -95,6 +104,7 @@ export default [
         firstName: 'Jane',
         lastName: 'Doe',
         school: 'Columbia University',
+        function: 'Chems',
         interviewStatus: 'pending',
         essay1: 'lkasjdflkj lkasjdflk ajsdlkfjasdfjkasdjflkajsdlfk aldfjlkdjf sdjf ljdflksjdflkjasdlkfjalskd klsadjflkasdjf lkasjdflkjsdfkljasdlkfj aklsdjf kasdjflkajsd fkdjf laksdjfasdklfj lsjdf lkasjdf lkajsdflkjaskfj sdkjf lsdjfkasdjf asjd flksdf',
         essay2: 'lasjdf lkjjfioejf;asjdfl :DLKjf iej fljsdlifj ewqlkjf adj foijrt8ejrflkahej845thalksdj fie h8t ja;dj foiq38h 4kasdjfladklfjasdlk fq;3oijaslfjalksdjfq3 rjhaisldjfklasjdf qi3jeklasjdflajdsklfjqiwejfklasdjfiqjeijaejtwrtuoaesdjklcjkvmxmaosjxlmakljefos;dowjefklzdfn,nxvheifjKsnfawjsdfkandf;gkfgja;;wejg'

@@ -6,6 +6,8 @@ class InterviewerHomePage extends Component {
     constructor(props) {
         super(props);
     }
+    getFunctions(){
+    }
     render() {
         const candidates = dummyData.map((item, index)=>{
             const {firstName, lastName} = item;
@@ -43,6 +45,7 @@ class InterviewerHomePage extends Component {
                                     </div>
                                 </div>
                                 <div className="divider"></div>
+                                div.essay-container
                                 <div className="row essay">
                                     <span>Essay 1: </span><p>{dummyData[0].essay1}</p>
                                 </div>

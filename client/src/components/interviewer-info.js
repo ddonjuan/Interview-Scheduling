@@ -14,7 +14,7 @@ class InterviewerInfo extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectOption = this.handleSelectOption.bind(this);
-        this.redirectToLogin = this.redirectToLogin.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -28,18 +28,18 @@ class InterviewerInfo extends Component {
             department: event.target.value
         })
     }
-
-    redirectToLogin(){
+    handleSubmit(event) {
         this.props.history.push("/interviewer-login");
+
     }
 
     render() {
         console.log("this is the state in info: ", this.state);
-        const {firstName, lastName, department} = this.state;
-            
+        const { firstName, lastName, department } = this.state;
+
         return (
             <div className="container">
-                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} submit={this.redirectToLogin}/>
+                <Modal id="1" title="Is this information correct?" firstName={firstName} lastName={lastName} function={department} submit={this.handleSubmit} />
                 <h4 className="center">Enter Information</h4>
                 <div className="row in">
                     <div class="input-field col s6 in">
@@ -57,13 +57,7 @@ class InterviewerInfo extends Component {
                 <div className="row drop-down-container">
                     <div className="col s6 in">
                         <label>Function</label>
-                        <SelectDropDown id="initial-function" selectTitle="Function" submit={this.handleSelectOption} value={['4', '5', '6']}/>
-                        {/* <select onChange={this.handleSelectOption} className="browser-default" ref="function">
-                            <option value="" disabled selected>Choose your department</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select> */}
+                        <SelectDropDown id="initial-function" selectTitle="Function" submit={this.handleSelectOption} value={['4', '5', '6']} />
                     </div>
                 </div>
                 <button onClick={() => showElement("1")} className="waves-effect waves-dark btn-large modal-trigger info-button">Save</button>
