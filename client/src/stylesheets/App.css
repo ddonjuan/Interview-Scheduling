@@ -190,3 +190,24 @@
 .essay *{
   margin: 4%;
 }
+.s2 .name-school{
+  margin-left: 5%;
+  margin-left: 0 !important;
+}
+.name-school{
+  font-size: 1.3em;
+
+}
+.status-display{
+  font-size: 1.3em;
+}
+.dot-status{
+  display: inline-block;
+  margin-left: 8%;
+  width:12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.name-backgroundcolor{
+  background-color: rgba(0,0,0,.5);
+}
