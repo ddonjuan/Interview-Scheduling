@@ -6,7 +6,7 @@ export default [
         lastName: 'Donjuan',
         school: 'Cal State Fullerton',
         department: 'Chems',
-        interviewStatus: 'pending',
+        interviewStatus: 'accepted',
         essay1: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse saepe hic autem aperiam architecto sint illum veritatis consectetur nesciunt optio deserunt aspernatur officiis rerum, facere velit delectus doloribus, illo possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, a eligendi vitae iure error ab molestias deleniti dolorum quidem, impedit voluptate amet voluptatem at ea accusantium earum tenetur aspernatur quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quaerat, ab iusto et suscipit repellendus quas totam deleniti atque iure optio omnis? Omnis ex saepe provident voluptatem nostrum facere enim?',
         essay2: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure atque ipsum assumenda distinctio voluptates et, repellendus tenetur vitae enim a, magnam harum animi perspiciatis accusantium, possimus earum. Quibusdam, cupiditate ex. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum consequatur in, natus modi totam numquam eveniet mollitia nobis explicabo quidem aut recusandae cupiditate, impedit cumque iusto deleniti? Qui, quam neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nemo, unde cumque commodi provident earum eveniet reprehenderit ratione magnam sapiente illum aut dolor debitis. Consectetur earum reiciendis animi repudiandae quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, eum in maiores officiis dignissimos sint quis natus saepe totam voluptas minus eveniet nihil ipsa, obcaecati non exercitationem ea quo quasi.'
     },
@@ -50,7 +50,7 @@ export default [
         lastName: 'Pitaki',
         school: 'UCI',
         department: 'Prep',
-        interviewStatus: 'pending',
+        interviewStatus: 'rejected',
         essay1: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse saepe hic autem aperiam architecto sint illum veritatis consectetur nesciunt optio deserunt aspernatur officiis rerum, facere velit delectus doloribus, illo possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, a eligendi vitae iure error ab molestias deleniti dolorum quidem, impedit voluptate amet voluptatem at ea accusantium earum tenetur aspernatur quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quaerat, ab iusto et suscipit repellendus quas totam deleniti atque iure optio omnis? Omnis ex saepe provident voluptatem nostrum facere enim?',
         essay2: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure atque ipsum assumenda distinctio voluptates et, repellendus tenetur vitae enim a, magnam harum animi perspiciatis accusantium, possimus earum. Quibusdam, cupiditate ex. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum consequatur in, natus modi totam numquam eveniet mollitia nobis explicabo quidem aut recusandae cupiditate, impedit cumque iusto deleniti? Qui, quam neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nemo, unde cumque commodi provident earum eveniet reprehenderit ratione magnam sapiente illum aut dolor debitis. Consectetur earum reiciendis animi repudiandae quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, eum in maiores officiis dignissimos sint quis natus saepe totam voluptas minus eveniet nihil ipsa, obcaecati non exercitationem ea quo quasi.'
     },
@@ -61,7 +61,7 @@ export default [
         lastName: 'Potter',
         school: 'Hogwarts',
         department: 'Chems',
-        interviewStatus: 'pending',
+        interviewStatus: 'rejected',
         essay1: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse saepe hic autem aperiam architecto sint illum veritatis consectetur nesciunt optio deserunt aspernatur officiis rerum, facere velit delectus doloribus, illo possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, a eligendi vitae iure error ab molestias deleniti dolorum quidem, impedit voluptate amet voluptatem at ea accusantium earum tenetur aspernatur quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quaerat, ab iusto et suscipit repellendus quas totam deleniti atque iure optio omnis? Omnis ex saepe provident voluptatem nostrum facere enim?',
         essay2: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure atque ipsum assumenda distinctio voluptates et, repellendus tenetur vitae enim a, magnam harum animi perspiciatis accusantium, possimus earum. Quibusdam, cupiditate ex. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum consequatur in, natus modi totam numquam eveniet mollitia nobis explicabo quidem aut recusandae cupiditate, impedit cumque iusto deleniti? Qui, quam neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nemo, unde cumque commodi provident earum eveniet reprehenderit ratione magnam sapiente illum aut dolor debitis. Consectetur earum reiciendis animi repudiandae quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, eum in maiores officiis dignissimos sint quis natus saepe totam voluptas minus eveniet nihil ipsa, obcaecati non exercitationem ea quo quasi.'
     },
@@ -94,7 +94,7 @@ export default [
         lastName: 'Pham',
         school: 'Cal State Fullerton',
         department: 'Chems',
-        interviewStatus: 'pending',
+        interviewStatus: 'accepted',
         essay1: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse saepe hic autem aperiam architecto sint illum veritatis consectetur nesciunt optio deserunt aspernatur officiis rerum, facere velit delectus doloribus, illo possimus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, a eligendi vitae iure error ab molestias deleniti dolorum quidem, impedit voluptate amet voluptatem at ea accusantium earum tenetur aspernatur quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quaerat, ab iusto et suscipit repellendus quas totam deleniti atque iure optio omnis? Omnis ex saepe provident voluptatem nostrum facere enim?',
         essay2: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure atque ipsum assumenda distinctio voluptates et, repellendus tenetur vitae enim a, magnam harum animi perspiciatis accusantium, possimus earum. Quibusdam, cupiditate ex. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum consequatur in, natus modi totam numquam eveniet mollitia nobis explicabo quidem aut recusandae cupiditate, impedit cumque iusto deleniti? Qui, quam neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nemo, unde cumque commodi provident earum eveniet reprehenderit ratione magnam sapiente illum aut dolor debitis. Consectetur earum reiciendis animi repudiandae quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, eum in maiores officiis dignissimos sint quis natus saepe totam voluptas minus eveniet nihil ipsa, obcaecati non exercitationem ea quo quasi.'
     },

@@ -14,20 +14,27 @@ class InterviewerHomePage extends Component {
     componentDidMount() {
         this.defaultCandidateInfo();
     }
+    statusColorChange(status, statusElement){
+        if(status === 'accepted'){
+            statusElement.style.backgroundColor = "green";
+            return
+        }
+        if(status === 'rejected'){
+            statusElement.style.backgroundColor="red";
+            return
+        }
+        statusElement.style.backgroundColor="orange";
+    }
     defaultCandidateInfo() {
         this.getNameInfo(dummyData[0]);
     }
-    clearPreviousCandidateInfo(elementArr) {
+    clearPreviousCandidateInfo(elementArr, namesBackground) {
         elementArr.map((item, index) => {
             if (!item.namesElements) {
                 item.innerHTML = "";
             }
-            if (item.namesElements) {
-                item.namesElements.style.backgroundColor = "white";
-
-            }
         });
-
+        namesBackground.classList.remove('name-backgroundcolor');
     }
 
     getNameInfo(item) {
@@ -37,15 +44,20 @@ class InterviewerHomePage extends Component {
         var fullNameElement = document.getElementsByClassName('full-name')[0];
         var schoolNameElement = document.getElementsByClassName('school-name')[0];
         var statusELement = document.getElementsByClassName('status-name')[0];
+        var statusColor = document.getElementsByClassName("dot-status")[0];
+        var departmentElement = document.getElementsByClassName('function-name')[0];
         var essay1Element = document.getElementsByClassName('essay-1-set')[0];
         var essay2Element = document.getElementsByClassName('essay-2-set')[0];
         var namesElements = document.getElementsByClassName('names')[0];
-        elementVar.push(imgElement, fullNameElement, schoolNameElement, statusELement, essay1Element, essay2Element);
-        this.clearPreviousCandidateInfo(elementVar);
+        elementVar.push(imgElement, fullNameElement, schoolNameElement, statusELement, essay1Element, essay2Element, departmentElement, statusColor);
+        this.clearPreviousCandidateInfo(elementVar, namesElements);
         this.setState({
             elementArr: elementVar
         });
-        namesElements.style.backgroundColor = "rgba(0,0,0,.4)";
+
+        this.statusColorChange(interviewStatus, statusColor);
+
+        namesElements.classList.add('name-backgroundcolor');
 
         imgElement.setAttribute('src', img);
 
@@ -58,6 +70,9 @@ class InterviewerHomePage extends Component {
         var statusDisplay = document.createTextNode(`${interviewStatus}`);
         statusELement.appendChild(statusDisplay);
 
+        var functionDisplay = document.createTextNode(`${department}`);
+        departmentElement.appendChild(functionDisplay);
+
         var essay1Display = document.createTextNode(`${essay1}`);
         essay1Element.appendChild(essay1Display);
 
@@ -66,6 +81,7 @@ class InterviewerHomePage extends Component {
     }
 
     render() {
+        
         console.log("this is the state: ", this.state);
         const candidates = dummyData.map((item, index) => {
             const { firstName, lastName } = item;
@@ -97,11 +113,14 @@ class InterviewerHomePage extends Component {
                                 <div className="row info-header">
                                     <div className="col s12">
                                         <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div>
-                                        <div className="col s1 name-school">
-                                            <span className="full-name"></span>
-                                            <span className="school-name"></span>
+                                        <div className="col s4 name-school">
+                                            <div className="full-name"></div>
+                                            <div className="school-name"></div>
+                                            <div className="function-name"></div>
                                         </div>
-                                        <div className="col s2 right status-display">Status: <span className="status-name"></span></div>
+                                        <div className="col s3 right status-display">Status:    
+                                            <div class="dot-status"> </div><span className="status-name"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="divider"></div>
