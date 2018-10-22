@@ -9,6 +9,7 @@ import InterviewerHomePage from './interviewer-home-page';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../stylesheets/App.css';
 import InterviewerLandingPage from './interviewer-landing-page';
+import Schedule from './schedule'
 
 class App extends Component {
   constructor(props){
@@ -38,6 +39,7 @@ class App extends Component {
         <Route path="/interviewer-signup" component={InterviewerSignup} />
         <Route path="/interviewer-info" component={InterviewerInfo} />
         <Route path="/interviewer-homepage" component={InterviewerHomePage}/>
+        <Route path="/schedule" component={Schedule}/>
       </div>
     );
 
