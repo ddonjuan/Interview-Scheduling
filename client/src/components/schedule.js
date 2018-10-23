@@ -54,13 +54,6 @@ class Schedule extends Component {
 
                 <tbody>
                     <Time></Time>
-                    <Booth></Booth>
-                    <Booth></Booth>
-                    <Booth></Booth>
-                    <Booth></Booth>
-                    <Booth></Booth>
-                    <Booth></Booth>
-                    <Booth></Booth>
                 </tbody>
 
             </div>

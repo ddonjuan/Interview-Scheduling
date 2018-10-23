@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Booth from './schedule-booths';
 // import {Button, Icon} from 'react-materialize';
 // import {Button, Icon} from 'materialize-css/dist/css/materialize.min.css';
 
@@ -14,7 +15,10 @@ class Time extends Component {
     }
     render() {
         return (
+            <tr>
             <td s={1} className='time'>8:30</td>
+            <Booth></Booth>
+            </tr>
         )
     }
 }

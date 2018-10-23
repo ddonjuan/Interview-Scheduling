@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Block from './schedule-block'
 // import {Button, Icon} from 'react-materialize';
 // import {Button, Icon} from 'materialize-css/dist/css/materialize.min.css';
 
@@ -14,7 +15,7 @@ class Booth extends Component {
     }
     render() {
         return (
-                <td s={1} className='booth'>1</td>
+                <Block></Block>
         )
     }
 }
