@@ -143,7 +143,7 @@
 /* .home-info-container{
   padding:
 } */
-.sort-name-option, .sort-function-option, .sort-status-option{
+/* .sort-name-option, .sort-function-option, .sort-status-option{
   width: 10%;
 }
 .sort-name-option{
@@ -151,7 +151,7 @@
 }
 .sort-function-option{
   display: inline-block;
-}
+} */
 .names-container, .info-container{
   border: 1px solid black;
   height: 70vh;
@@ -191,7 +191,7 @@
   margin: 4%;
 }
 .s2 .name-school{
-  margin-left: 5%;
+  margin-left: 7%;
   margin-left: 0 !important;
 }
 .name-school{
@@ -210,4 +210,31 @@
 }
 .name-backgroundcolor{
   background-color: rgba(0,0,0,.5);
+}
+.full-name, .school-name, .function-name{
+  margin-bottom: 15%;
+}
+.search-bar{
+  display:none;
+  width: 24% !important;
+  margin-top: 1% !important;
+  margin-bottom: 0 !important;
+}
+
+.material-icons{
+  margin-top: 1.9%;
+  font-size: 2.6em !important;
+  cursor: default;
+}
+.showSearch{
+  display:block;
+  animation: extend 500ms ease-out;
+}
+@keyframes extend {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 24%;
+  }
 }

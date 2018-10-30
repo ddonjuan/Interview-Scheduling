@@ -13,10 +13,15 @@ class SelectDropDown extends Component {
             )
         })
         return (
-            <select key={id} onChange={submit} className={`browser-default ${selectClasses}`} ref="function">
+            <div className={`input-field ${selectClasses}`}>
+            <select id={id} key={id} onChange={submit} className={`browser-default `} ref="function">
                 <option value="" disabled selected>{selectTitle}</option>
                 {optionsElement}
-            </select>)
+            </select>
+
+            </div>
+            
+            )
     }
 }
 export default SelectDropDown;
