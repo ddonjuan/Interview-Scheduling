@@ -211,9 +211,9 @@
 .name-backgroundcolor{
   background-color: rgba(0,0,0,.5);
 }
-.full-name, .school-name, .function-name{
+/* .full-name, .school-name, .function-name{
   margin-bottom: 15%;
-}
+} */
 .search-bar{
   display:none;
   width: 24% !important;
