@@ -11,7 +11,9 @@ class InterviewerHomePage extends Component {
             department: '',
             alphabatize: '',
             status: '',
-            toggleSearchBar: false
+            toggleSearchBar: false,
+            interest: [],
+            status: []
         }
         this.getNameInfo = this.getNameInfo.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
