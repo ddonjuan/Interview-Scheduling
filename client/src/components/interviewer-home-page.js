@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SelectDropDown from './helpers/select-element';
 import dummyData from './dummy-data';
+import axios from 'axios';
 
 class InterviewerHomePage extends Component {
     constructor(props) {
@@ -10,18 +11,32 @@ class InterviewerHomePage extends Component {
             department: '',
             alphabatize: '',
             status: '',
-            toggleSearchBar: false
+            toggleSearchBar: false,
+            interest: [],
+            status: []
         }
         this.getNameInfo = this.getNameInfo.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
         this.sortAlphabatically = this.sortAlphabatically.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
+        this.getStudentInfo = this.getStudentInfo.bind(this);
     }
 
     componentDidMount() {
         this.defaultCandidateInfo();
+        this.getStudentInfo();
     }
 
+    async getStudentInfo(){
+        try{
+            await axios.get('http://localhost:8888/get-student-info.php').then(response=>{
+                console.log("this is the response from axio call: ", response);
+            });
+        }
+        catch(err){
+            console.log("this is the error if never reach server: ", err);
+        }
+    }
     handleSelectDepartment(event) {
         const dropDownClicked = event.target;
         const dropDownId = dropDownClicked.id;
@@ -181,7 +196,7 @@ class InterviewerHomePage extends Component {
     getNameInfo(item) {
         const { firstName, lastName, school, department, img, interviewStatus, essay1, essay2 } = item;
         let elementVar = [];
-        // var imgElement = document.getElementsByClassName('pic-class')[0];
+        var imgElement = document.getElementsByClassName('pic-class')[0];
         var fullNameElement = document.getElementsByClassName('full-name')[0];
         var schoolNameElement = document.getElementsByClassName('school-name')[0];
         var statusELement = document.getElementsByClassName('status-name')[0];
@@ -193,7 +208,7 @@ class InterviewerHomePage extends Component {
         this.clearPreviousCandidateInfo(elementVar);
 
         this.statusColorChange(interviewStatus, statusColor);
-        // imgElement.setAttribute('src', img);
+        imgElement.setAttribute('src', img);
 
         var fullName = document.createTextNode(`${firstName} ${lastName}`);
         fullNameElement.appendChild(fullName);
@@ -251,7 +266,7 @@ class InterviewerHomePage extends Component {
                             <div className="col s8 info-container">
                                 <div className="row info-header">
                                     <div className="col s12">
-                                        {/* <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div> */}
+                                        <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div>
                                         <div className="col s4 name-school">
                                             <div className="full-name"></div>
                                             <div className="school-name"></div>
