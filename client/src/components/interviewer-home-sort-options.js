@@ -8,7 +8,7 @@ class InterviewerHomeSortOptions extends Component {
     }
 
     render() {
-        const {showSearchBar, handleSelectDepartment, searchBarToggle, elementsArr} = this.props;
+        const {showSearchBar, handleSelectDepartment, searchBarToggle, elementsArr, candidateInfo} = this.props;
         return (
             <div className="section">
                 <div className="col s12 inner-header">
@@ -18,7 +18,7 @@ class InterviewerHomeSortOptions extends Component {
                     <i onClick={() => { searchBarToggle() }} className="material-icons col small search-icon">search</i>
                     <input className={`input-field col s1 search-bar ${showSearchBar}`} />
                     <div className="col s2 right count">
-                        <h6>Count: {elementsArr.length}</h6>
+                        <h6>Count: {candidateInfo.length}</h6>
                     </div>
                 </div>
             </div>

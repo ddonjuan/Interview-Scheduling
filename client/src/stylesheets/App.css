@@ -239,5 +239,23 @@
   }
 }
 .no-candidates{
-  font-size: 2em;
+  font-size: 1.6em;
+  box-shadow: 0 4px 4px 0;
+  text-align: center;
+  margin: 0 auto;
+  /* display: flex;
+  justify-content: center;
+  align-content: center; */
+  margin-top: 2%;
+  height: 100%;
+}
+.no-candidates div{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    display: block;
+}
+.no-candidates button{
+  /* position: absolute;
+  font-weight: 700; */
 }

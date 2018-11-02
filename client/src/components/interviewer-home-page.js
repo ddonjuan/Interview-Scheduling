@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import InterviewerHomeSortOptions from './interviewer-home-sort-options';
 import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
-import M from 'materialize';
 import axios from 'axios';
 
 class InterviewerHomePage extends Component {
@@ -19,6 +18,7 @@ class InterviewerHomePage extends Component {
         this.sortAlphabatically = this.sortAlphabatically.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
         this.getStudentInfo = this.getStudentInfo.bind(this);
+        this.resetCandidateList = this.resetCandidateList.bind(this);
     }
 
     componentWillMount() {
@@ -66,11 +66,7 @@ class InterviewerHomePage extends Component {
     }
 
     displayByDepartment(department, status) {
-        console.log("THIS HI DISPLAY DEPARTMENT FUNCTION")
         const { elementsArr } = this.state;
-        console.log("this is the department: ", department);
-        console.log("this is the status: ", status);
-
         var sortObj = [
             {
                 departmentArr: [],
@@ -82,9 +78,7 @@ class InterviewerHomePage extends Component {
         sortObj[0].departmentArr = [];
         sortObj[0].isValid = false;
         sortObj[0].isStatus = false;
-        console.log("THIS IS THE status IN PARTAMTER: ", status);
         if(status){
-            console.log("the status condiditon fired!!!@@")
             sortObj[0].isStatus = true;
             if(status === 'Default'){
                 sortObj[0].isStatus = false;
@@ -92,13 +86,10 @@ class InterviewerHomePage extends Component {
         }
         elementsArr.map((item, index)=>{
             if (item.interest === department) {
-                console.log("this is the item in department: ", item)
-
                 sortObj[0].departmentArr.push(item);
                 sortObj[0].isValid = true;
 
                 if(sortObj[0].isStatus){
-                    console.log("this hit the status sort*@*@*@*@")
                     var currentArray = sortObj[0].departmentArr;
                     var statusSort = [];
                     currentArray.map((item, index)=>{
@@ -111,7 +102,6 @@ class InterviewerHomePage extends Component {
             }
         });
 
-        console.log("this is the object in the function: ", sortObj);
         return sortObj;
     }
     sortAlphabatically(elementsArr) {
@@ -161,15 +151,15 @@ class InterviewerHomePage extends Component {
             this.overallSortNames(sort);
         }
     }
-    namesBackgroundChange(event) {
-        var namesElements = document.getElementsByClassName('names');
-        var nameClicked = event.target;
-        for (var i = 0; i < namesElements.length; i++) {
-            namesElements[i].classList.remove('name-backgroundcolor');
-        }
-        nameClicked.classList.add('name-backgroundcolor');
+    // namesBackgroundChange(event) {
+    //     var namesElements = document.getElementsByClassName('names');
+    //     var nameClicked = event.target;
+    //     for (var i = 0; i < namesElements.length; i++) {
+    //         namesElements[i].classList.remove('name-backgroundcolor');
+    //     }
+    //     nameClicked.classList.add('name-backgroundcolor');
 
-    }
+    // }
     statusColorChange(status, statusElement) {
         if (status === 'accepted') {
             statusElement.style.backgroundColor = "green";
@@ -210,12 +200,20 @@ class InterviewerHomePage extends Component {
             candidateInfo: item
         });
     }   
-    toastFunction(){
-        M.toast({html: 'I am a toast!'})
+
+    resetCandidateList(){
+        this.setState({
+            department: 'Default',
+            status: 'Default'
+        });
+        var status = document.getElementById('status');
+        var department = document.getElementById('function-list');
+        status.value = "Default";
+        department.value = "Default";
     }
 
+
     render() {
-        this.toastFunction();
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo } = this.state;
         this.dropDownSortOptions(alphabatize);
         const drop = this.displayByDepartment(department, status);
@@ -233,12 +231,11 @@ class InterviewerHomePage extends Component {
             }
         });
 
-
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <InterviewerHomeSortOptions elementsArr = {elementsArr} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
-                    <InterviewerHomeInfoDisplay elementsArr = {elementsArr} displayCandidates={displayCandidates} candidateInfo={candidateInfo}/>
+                    <InterviewerHomeSortOptions elementsArr = {elementsArr}  candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
+                    <InterviewerHomeInfoDisplay elementsArr = {elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo}/>
                 </div>
             </div>
         )
