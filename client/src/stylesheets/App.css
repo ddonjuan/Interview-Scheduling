@@ -216,7 +216,7 @@
 } */
 .search-bar{
   display:none;
-  width: 24% !important;
+  width: 18% !important;
   margin-top: 1% !important;
   margin-bottom: 0 !important;
 }
@@ -235,6 +235,9 @@
     width: 0%;
   }
   100% {
-    width: 24%;
+    width: 18%;
   }
+}
+.no-candidates{
+  font-size: 2em;
 }
