@@ -24,6 +24,9 @@ class InterviewerHomePage extends Component {
         this.resetCandidateList = this.resetCandidateList.bind(this);
     }
 
+    defaultInfoDisplay(currentCandidateArr){
+        
+    }
     componentWillMount() {
         // this.defaultCandidateInfo();
         this.getStudentInfo();
@@ -231,11 +234,11 @@ class InterviewerHomePage extends Component {
             toggleSearchBar: true
         });
     }
-    displayCandidateInfo(item) {
-        console.log("CANDIATIATE FIRED!")
+    displayCandidateInfo(item, index) {
         this.setState({
             candidateInfo: item
         });
+  
     }
 
     resetCandidateList() {
@@ -248,6 +251,11 @@ class InterviewerHomePage extends Component {
         status.value = "Default";
         department.value = "Default";
     }
+    defaultCandidateDisplay(arr){
+        console.log("this is the show ARR IN THE FIRUNCTION: ", arr);
+        // const {firstname, lastname, school, status, essay1, essay2, interest} = arr;
+        // document.getElementsByClassName("full-name")[0].innerHTML = arr;
+    }
 
     render() {
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
@@ -256,11 +264,10 @@ class InterviewerHomePage extends Component {
         const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = showArr.map((item, index) => {
-            console.log("this is the item in the map in elements arr: ", item.firstname);
             const { firstname, lastname } = item;
             if (showArr) {
                 return (
-                    <div onClick={() => { this.displayCandidateInfo(item) }} className="names" id={item.id} index={index}>
+                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} index={index}>
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
@@ -270,7 +277,7 @@ class InterviewerHomePage extends Component {
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <InterviewerHomeSortOptions elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
+                    <InterviewerHomeSortOptions showArr={showArr} elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
                     <InterviewerHomeInfoDisplay elementsArr={elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>
             </div>
