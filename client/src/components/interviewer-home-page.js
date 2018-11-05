@@ -1,41 +1,65 @@
 import React, { Component } from 'react';
-import SelectDropDown from './helpers/select-element';
-import dummyData from './dummy-data';
+import InterviewerHomeSortOptions from './interviewer-home-sort-options';
+import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
 import axios from 'axios';
 
 class InterviewerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            elementsArr: dummyData,
+            elementsArr: [],
+            search: '',
             department: '',
             alphabatize: '',
             status: '',
             toggleSearchBar: false,
-            interest: [],
-            status: []
+            candidateInfo: [],
+            anotherArr: []
         }
-        this.getNameInfo = this.getNameInfo.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
         this.sortAlphabatically = this.sortAlphabatically.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
         this.getStudentInfo = this.getStudentInfo.bind(this);
+        this.resetCandidateList = this.resetCandidateList.bind(this);
     }
 
-    componentDidMount() {
-        this.defaultCandidateInfo();
+    defaultInfoDisplay(currentCandidateArr){
+        
+    }
+    componentWillMount() {
+        // this.defaultCandidateInfo();
         this.getStudentInfo();
     }
 
-    async getStudentInfo(){
-        try{
-            await axios.get('http://localhost:8888/get-student-info.php').then(response=>{
+    async getStudentInfo() {
+        try {
+            await axios.get('http://localhost:8888/get-student-info.php').then(response => {
                 console.log("this is the response from axio call: ", response);
+                this.setState({
+                    elementsArr: response.data.data
+                });
             });
         }
-        catch(err){
+        catch (err) {
             console.log("this is the error if never reach server: ", err);
         }
+    }
+    handleInputChange(event) {
+        const { value } = event.target;
+        this.setState({
+            search: value,
+        });
+    }
+    displayCandidateSearch(arrayToSearch, container) {
+        const { search } = this.state;
+        arrayToSearch.map((item, index) => {
+            if (search === arrayToSearch.firstname || search === arrayToSearch.lastname) {
+                container.push(item);
+            }
+        })
+        return container;
+
     }
     handleSelectDepartment(event) {
         const dropDownClicked = event.target;
@@ -63,50 +87,67 @@ class InterviewerHomePage extends Component {
 
     }
 
-    displayByDepartment(department, status) {
+    displayByDepartment(department, status, search) {
         const { elementsArr } = this.state;
-
         var sortObj = [
             {
                 departmentArr: [],
                 isValid: false,
-                isStatus: false
+                isStatus: false,
+                isDepartment: false,
+                isSearch: false
             }
         ];
 
         sortObj[0].departmentArr = [];
         sortObj[0].isValid = false;
         sortObj[0].isStatus = false;
+        sortObj[0].isDepartment =  false;
+        sortObj[0].isSearch = false;
 
-        if(status){
+        if(search){
+            sortObj[0].isSearch = true;
+        }
+
+        if (status) {
             sortObj[0].isStatus = true;
-            if(status === 'Default'){
+            if (status === 'Default') {
                 sortObj[0].isStatus = false;
             }
         }
-        Object.keys(elementsArr).forEach(key => {
-            if (elementsArr[key].department === department) {
-
-                sortObj[0].departmentArr.push(elementsArr[key]);
+        elementsArr.map((item, index) => {
+            if (item.interest === department) {
+                sortObj[0].departmentArr.push(item);
                 sortObj[0].isValid = true;
-                if(sortObj[0].isStatus){
+
+                if (sortObj[0].isStatus) {
                     var currentArray = sortObj[0].departmentArr;
                     var statusSort = [];
-                    currentArray.map((item, index)=>{
-                        if(item.interviewStatus === status){
+                    currentArray.map((item, index) => {
+                        if (item.status === status) {
                             statusSort.push(item);
                         }
                     });
                     sortObj[0].departmentArr = statusSort;
                 }
+                if(sortObj[0].isSearch){
+                    var searchArr = [];
+                    sortObj[0].departmentArr.map((item, index)=>{
+                        if(item.firstname === search || item.lastname === search){
+                            searchArr.push(item);
+                        }
+                    })
+                    sortObj[0].departmentArr = searchArr;
+                }
             }
         });
+
         return sortObj;
     }
     sortAlphabatically(elementsArr) {
         elementsArr.sort((compare1, compare2) => {
-            let lastName1 = compare1.lastName.toLowerCase();
-            let lastName2 = compare2.lastName.toLowerCase()
+            let lastName1 = compare1.lastname.toLowerCase();
+            let lastName2 = compare2.lastname.toLowerCase()
             if (lastName1 < lastName2) {
                 return -1;
             }
@@ -119,7 +160,7 @@ class InterviewerHomePage extends Component {
     overallSortNames(sort) {
         const { elementsArr } = this.state;
         var sortArr = elementsArr;
-        if(sort === "Default"){
+        if (sort === "Default") {
 
             return;
         }
@@ -134,8 +175,8 @@ class InterviewerHomePage extends Component {
     }
     sortAlphabaticallyReverse(elementsArr) {
         elementsArr.sort((compare1, compare2) => {
-            let lastName1 = compare1.lastName.toLowerCase();
-            let lastName2 = compare2.lastName.toLowerCase()
+            let lastName1 = compare1.lastname.toLowerCase();
+            let lastName2 = compare2.lastname.toLowerCase()
             if (lastName1 > lastName2) {
                 return -1;
             }
@@ -150,15 +191,15 @@ class InterviewerHomePage extends Component {
             this.overallSortNames(sort);
         }
     }
-    namesBackgroundChange(event) {
-        var namesElements = document.getElementsByClassName('names');
-        var nameClicked = event.target;
-        for (var i = 0; i < namesElements.length; i++) {
-            namesElements[i].classList.remove('name-backgroundcolor');
-        }
-        nameClicked.classList.add('name-backgroundcolor');
+    // namesBackgroundChange(event) {
+    //     var namesElements = document.getElementsByClassName('names');
+    //     var nameClicked = event.target;
+    //     for (var i = 0; i < namesElements.length; i++) {
+    //         namesElements[i].classList.remove('name-backgroundcolor');
+    //     }
+    //     nameClicked.classList.add('name-backgroundcolor');
 
-    }
+    // }
     statusColorChange(status, statusElement) {
         if (status === 'accepted') {
             statusElement.style.backgroundColor = "green";
@@ -170,9 +211,9 @@ class InterviewerHomePage extends Component {
         }
         statusElement.style.backgroundColor = "orange";
     }
-    defaultCandidateInfo() {
-        this.getNameInfo(dummyData[0]);
-    }
+    // defaultCandidateInfo() {
+    //     this.getNameInfo(dummyData[0]);
+    // }
     clearPreviousCandidateInfo(elementArr, namesBackground) {
         elementArr.map((item, index) => {
             if (!item.namesElements) {
@@ -181,9 +222,9 @@ class InterviewerHomePage extends Component {
         });
         // namesBackground.classList.remove('name-backgroundcolor');
     }
-    searchBarToggle(){
-        const {toggleSearchBar} = this.state;
-        if(toggleSearchBar){
+    searchBarToggle() {
+        const { toggleSearchBar } = this.state;
+        if (toggleSearchBar) {
             this.setState({
                 toggleSearchBar: false
             });
@@ -193,101 +234,51 @@ class InterviewerHomePage extends Component {
             toggleSearchBar: true
         });
     }
-    getNameInfo(item) {
-        const { firstName, lastName, school, department, img, interviewStatus, essay1, essay2 } = item;
-        let elementVar = [];
-        var imgElement = document.getElementsByClassName('pic-class')[0];
-        var fullNameElement = document.getElementsByClassName('full-name')[0];
-        var schoolNameElement = document.getElementsByClassName('school-name')[0];
-        var statusELement = document.getElementsByClassName('status-name')[0];
-        var statusColor = document.getElementsByClassName("dot-status")[0];
-        var departmentElement = document.getElementsByClassName('function-name')[0];
-        var essay1Element = document.getElementsByClassName('essay-1-set')[0];
-        var essay2Element = document.getElementsByClassName('essay-2-set')[0];
-        elementVar.push(fullNameElement, schoolNameElement, statusELement, essay1Element, essay2Element, departmentElement, statusColor);
-        this.clearPreviousCandidateInfo(elementVar);
+    displayCandidateInfo(item, index) {
+        this.setState({
+            candidateInfo: item
+        });
+  
+    }
 
-        this.statusColorChange(interviewStatus, statusColor);
-        imgElement.setAttribute('src', img);
-
-        var fullName = document.createTextNode(`${firstName} ${lastName}`);
-        fullNameElement.appendChild(fullName);
-
-        var schoolName = document.createTextNode(`${school}`)
-        schoolNameElement.appendChild(schoolName);
-
-        var statusDisplay = document.createTextNode(`${interviewStatus}`);
-        statusELement.appendChild(statusDisplay);
-
-        var functionDisplay = document.createTextNode(`${department}`);
-        departmentElement.appendChild(functionDisplay);
-
-        var essay1Display = document.createTextNode(`${essay1}`);
-        essay1Element.appendChild(essay1Display);
-
-        var essay2Display = document.createTextNode(`${essay2}`);
-        essay2Element.appendChild(essay2Display);
+    resetCandidateList() {
+        this.setState({
+            department: 'Default',
+            status: 'Default'
+        });
+        var status = document.getElementById('status');
+        var department = document.getElementById('function-list');
+        status.value = "Default";
+        department.value = "Default";
+    }
+    defaultCandidateDisplay(arr){
+        console.log("this is the show ARR IN THE FIRUNCTION: ", arr);
+        // const {firstname, lastname, school, status, essay1, essay2, interest} = arr;
+        // document.getElementsByClassName("full-name")[0].innerHTML = arr;
     }
 
     render() {
-        const { elementsArr, department, alphabatize, status, toggleSearchBar } = this.state;
+        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
         this.dropDownSortOptions(alphabatize);
-        const drop = this.displayByDepartment(department, status);
-        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr; 
+        const drop = this.displayByDepartment(department, status, search);
+        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
-        const candidates = showArr.map((item, index) => {
-            const { firstName, lastName } = item;
-            return (
-                <div onClick={() => { this.getNameInfo(item); }} className="names" id={item.id}>
-                    <span>{firstName} {lastName}</span>
-                </div>
-            )
+        const displayCandidates = showArr.map((item, index) => {
+            const { firstname, lastname } = item;
+            if (showArr) {
+                return (
+                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} index={index}>
+                        <span>{firstname} {lastname}</span>
+                    </div>
+                )
+            }
         });
-
 
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <div className="section">
-                        <div className="col s12 inner-header">
-                            <SelectDropDown id="function-list" submit={this.handleSelectDepartment} selectTitle="Function" value={['Default', 'Chems', 'Test', 'Prep', 'Janitor']} selectClasses="col s2 sort-function-option" />
-                            <SelectDropDown id="status" submit={this.handleSelectDepartment} selectTitle="Status" value={['Default', 'pending', 'accepted', 'rejected']} selectClasses="col s2 sort-status-option" />
-                            <SelectDropDown id="sort" submit={this.handleSelectDepartment} selectTitle="Alphabatize" value={['Default', 'A-Z', 'Z-A']} selectClasses="col s2 sort-name-option" />
-                            <i onClick={()=>{this.searchBarToggle()}} className="material-icons col small search-icon">search</i>
-                            <input className={`input-field col s1 search-bar ${showSearchBar}`}/>
-                            <div className="col s2 right count">
-                                <h6>Count: {candidates.length}</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="section">
-                        <div className="col s12 home-info-container">
-                            <div className="col s4 names-container">{candidates}</div>
-                            <div className="col s8 info-container">
-                                <div className="row info-header">
-                                    <div className="col s12">
-                                        <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div>
-                                        <div className="col s4 name-school">
-                                            <div className="full-name"></div>
-                                            <div className="school-name"></div>
-                                            <div className="function-name"></div>
-                                        </div>
-                                        <div className="col s3 right status-display">Status:
-                                            <div className="dot-status"> </div><span className="status-name"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="divider"></div>
-                                <div className="row essay">
-                                    <span>Essay 1: </span><p className="essay-1-set"></p>
-                                </div>
-                                <div className="row essay">
-                                    <span>Essay 2: </span><p className="essay-2-set"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <InterviewerHomeSortOptions showArr={showArr} elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
+                    <InterviewerHomeInfoDisplay elementsArr={elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>
             </div>
         )
