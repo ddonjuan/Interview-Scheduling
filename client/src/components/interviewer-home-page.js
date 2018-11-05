@@ -8,12 +8,15 @@ class InterviewerHomePage extends Component {
         super(props);
         this.state = {
             elementsArr: [],
+            search: '',
             department: '',
             alphabatize: '',
             status: '',
             toggleSearchBar: false,
-            candidateInfo:[]
+            candidateInfo: [],
+            anotherArr: []
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
         this.sortAlphabatically = this.sortAlphabatically.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
@@ -26,18 +29,34 @@ class InterviewerHomePage extends Component {
         this.getStudentInfo();
     }
 
-    async getStudentInfo(){
-        try{
-            await axios.get('http://localhost:8888/get-student-info.php').then(response=>{
+    async getStudentInfo() {
+        try {
+            await axios.get('http://localhost:8888/get-student-info.php').then(response => {
                 console.log("this is the response from axio call: ", response);
                 this.setState({
                     elementsArr: response.data.data
                 });
             });
         }
-        catch(err){
+        catch (err) {
             console.log("this is the error if never reach server: ", err);
         }
+    }
+    handleInputChange(event) {
+        const { value } = event.target;
+        this.setState({
+            search: value,
+        });
+    }
+    displayCandidateSearch(arrayToSearch, container) {
+        const { search } = this.state;
+        arrayToSearch.map((item, index) => {
+            if (search === arrayToSearch.firstname || search === arrayToSearch.lastname) {
+                container.push(item);
+            }
+        })
+        return container;
+
     }
     handleSelectDepartment(event) {
         const dropDownClicked = event.target;
@@ -65,39 +84,57 @@ class InterviewerHomePage extends Component {
 
     }
 
-    displayByDepartment(department, status) {
+    displayByDepartment(department, status, search) {
         const { elementsArr } = this.state;
         var sortObj = [
             {
                 departmentArr: [],
                 isValid: false,
-                isStatus: false
+                isStatus: false,
+                isDepartment: false,
+                isSearch: false
             }
         ];
 
         sortObj[0].departmentArr = [];
         sortObj[0].isValid = false;
         sortObj[0].isStatus = false;
-        if(status){
+        sortObj[0].isDepartment =  false;
+        sortObj[0].isSearch = false;
+
+        if(search){
+            sortObj[0].isSearch = true;
+        }
+
+        if (status) {
             sortObj[0].isStatus = true;
-            if(status === 'Default'){
+            if (status === 'Default') {
                 sortObj[0].isStatus = false;
             }
         }
-        elementsArr.map((item, index)=>{
+        elementsArr.map((item, index) => {
             if (item.interest === department) {
                 sortObj[0].departmentArr.push(item);
                 sortObj[0].isValid = true;
 
-                if(sortObj[0].isStatus){
+                if (sortObj[0].isStatus) {
                     var currentArray = sortObj[0].departmentArr;
                     var statusSort = [];
-                    currentArray.map((item, index)=>{
-                        if(item.status === status){
+                    currentArray.map((item, index) => {
+                        if (item.status === status) {
                             statusSort.push(item);
                         }
                     });
                     sortObj[0].departmentArr = statusSort;
+                }
+                if(sortObj[0].isSearch){
+                    var searchArr = [];
+                    sortObj[0].departmentArr.map((item, index)=>{
+                        if(item.firstname === search || item.lastname === search){
+                            searchArr.push(item);
+                        }
+                    })
+                    sortObj[0].departmentArr = searchArr;
                 }
             }
         });
@@ -120,7 +157,7 @@ class InterviewerHomePage extends Component {
     overallSortNames(sort) {
         const { elementsArr } = this.state;
         var sortArr = elementsArr;
-        if(sort === "Default"){
+        if (sort === "Default") {
 
             return;
         }
@@ -182,9 +219,9 @@ class InterviewerHomePage extends Component {
         });
         // namesBackground.classList.remove('name-backgroundcolor');
     }
-    searchBarToggle(){
-        const {toggleSearchBar} = this.state;
-        if(toggleSearchBar){
+    searchBarToggle() {
+        const { toggleSearchBar } = this.state;
+        if (toggleSearchBar) {
             this.setState({
                 toggleSearchBar: false
             });
@@ -194,14 +231,14 @@ class InterviewerHomePage extends Component {
             toggleSearchBar: true
         });
     }
-    displayCandidateInfo(item){
+    displayCandidateInfo(item) {
         console.log("CANDIATIATE FIRED!")
         this.setState({
             candidateInfo: item
         });
-    }   
+    }
 
-    resetCandidateList(){
+    resetCandidateList() {
         this.setState({
             department: 'Default',
             status: 'Default'
@@ -212,19 +249,18 @@ class InterviewerHomePage extends Component {
         department.value = "Default";
     }
 
-
     render() {
-        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo } = this.state;
+        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
         this.dropDownSortOptions(alphabatize);
-        const drop = this.displayByDepartment(department, status);
-        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr; 
+        const drop = this.displayByDepartment(department, status, search);
+        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = showArr.map((item, index) => {
             console.log("this is the item in the map in elements arr: ", item.firstname);
             const { firstname, lastname } = item;
-            if(showArr){
+            if (showArr) {
                 return (
-                    <div onClick={()=>{this.displayCandidateInfo(item)}} className="names" id={item.id} index={index}>
+                    <div onClick={() => { this.displayCandidateInfo(item) }} className="names" id={item.id} index={index}>
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
@@ -234,8 +270,8 @@ class InterviewerHomePage extends Component {
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <InterviewerHomeSortOptions elementsArr = {elementsArr}  candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
-                    <InterviewerHomeInfoDisplay elementsArr = {elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo}/>
+                    <InterviewerHomeSortOptions elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
+                    <InterviewerHomeInfoDisplay elementsArr={elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>
             </div>
         )
