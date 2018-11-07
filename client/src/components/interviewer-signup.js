@@ -1,58 +1,102 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-class InterviwerSignup extends Component {
+class InterviewerSignup extends Component {
     constructor(props) {
-        super(props);
-
-        this.state= {
-            username: '',
-            password: '',
-            confirmPassword: ''
-        }
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        super(props)
     }
-    handleInputChange(event){
-        const {name, value} = event.target;
-        this.setState({
-            [name]: value
-        });
-    }
-    handleSubmit(event){
-        event.preventDefault();
-    }
+    emailValidation(name, value){
+        var emailFlag = false;
+    
+          if(name === 'email'){
+            var emailCheck = /[@]/;
+            var testEmail = emailCheck.test(value);
+            emailFlag = false;
+            if(testEmail){
+                this.showValid(name);
+                if(emailCheck){
+                    this.emailConfirmCheck(name);
+                }
+                return;
+              }
+              this.showInvalid(name);
+              this.setState({
+                  cEmailCheck: false
+              })
+          }
+          if(name === 'c_email'){
+            const {email} = this.state;
+            if(value === email){
+                this.showValid(name);
+                document.getElementsByClassName(name+"Right")[0].classList.add("showCEmail");
+                emailCheck = true;
+                this.setState({
+                    cEmailCheck: true
+                });
+                return
+            }
+            this.showInvalid(name);
+            document.getElementsByClassName(name+"Right")[0].classList.remove("showCEmail");
+            this.setState({
+                cEmailCheck: false
+            });
+          }
+        }    
     render() {
-        console.log("this is the state in the create login name: ", this.state);
+        const {enableSubmit} = this.props;
+        const submitButton = enableSubmit ? <Link to="/interviewer-homepage" className="waves-effect waves-light btn-large">Create</Link> : <button className="btn-large disabled">Create</button>
+        const { inputChange, uploadChange } = this.props;
+        const { firstName, lastName, userName, password, email, c_email, department } = this.props;
         return (
-            <div className="container interviewer-signup">
-                <h5 className="center">Create Log In</h5>
+            <div className="container step-1-page">
+                <h3 className="center">Please fill out form.</h3>
+                <div className="divider"></div>
+                <form className="col s12" action="">
+                    <div className="row">
+                        <div className="input-field col s6">
+                            <input placeholder="First Name" onChange={inputChange} name="firstName" value={firstName} id="firstName" type="text" className=""/>
+                            <label for="firstName" className="active">First Name</label>
+                            <div className="hidDiv firstName">Field must contain at least one character</div>
+                        </div>
+                        <div className="input-field col s6">
+                            <input placeholder="Last Name" onChange={inputChange} name="lastName" value={lastName} id="lastName" type="text" className=""/>
+                            <label for="lastName" className="active">Last Name</label>
+                            <div className="hidDiv lastName">Invalid Input. Field must contain at least one character</div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input placeholder="User Name" onChange={inputChange} name="userName" value={userName} id="userName" type="text" className=""/>
+                            <label for="userName" className="active">User Name</label>
+                        </div>
+                        <div className="input-field col s12">
+                            <input placeholder="Password" onChange={inputChange} name="password" value={userName} id="password" type="text" className=""/>
+                            <label for="password" className="active">Password</label>
+                        </div>
+                        <div className="input-field col s12">
+                            <input placeholder="Email" onChange={inputChange} name="email" value={email} id="email" type="email" className=""/>
+                            <label for="email" className="active">Email</label>
+                            <div className="hidDiv email">Invalid Input. Field must contain '@'</div>
+                        </div>
+                        <div className="input-field col s12">
+                            <input placeholder="Confirm Email" onChange={inputChange } name="c_email" id="c_email" type="email" value={c_email} className=""/>
+                            <label for="c_email" className="active">Confirm Email</label>
+                            <div className="hidDiv c_email">Email address does not match</div>
+                            <div className="hidDiv c_emailRight">Email Matches</div>
+                        </div>
+                        <div className="input-field col s12">
+                            <input placeholder="Department" onChange={inputChange} name="department" value={userName} id="department" type="text" className=""/>
+                            <label for="department" className="active">Department</label>
+                        </div>
+                    </div>
+                </form>
                 <div className="row">
-                    <form onClick={this.handleSubmit} action="" className="col s12">
-                        <div className="row in">
-                            <div className="input-field col s6 in">
-                                <input onChange={this.handleInputChange} name="username" id="interviewer-user-name" type="text" className="validate" />
-                                <label for="interviewer-user-name" className="active">User Name</label>
-                            </div>
-                        </div>
-                        <div className="row in">
-                            <div className="input-field col s6 in">
-                                <input onChange={this.handleInputChange} name="password" valueid="interviewer-password" type="password" className="validate" />
-                                <label for="interviewer-password" className="active">Password</label>
-                            </div>
-                        </div>
-                        <div className="row in">
-                            <div className="input-field col s6 in">
-                                <input onChange={this.handleInputChange} name="confirmPassword" id="interviewer-confirm-password" type="password" className="validate" />
-                                <label for="interviewer-confirm-password" className="active">Confirm Password</label>
-                            </div>
-                        </div>
-                        <Link to="/interviewer-info" className="btn waves-effect waves-teal btn-large submit-b" >Create Account</Link>
-                    </form>
-                    
+                    <div className="col s4 push-s5">
+                        {submitButton}
+                    </div>
                 </div>
             </div>
         )
     }
 }
-export default InterviwerSignup;
+export default InterviewerSignup;

@@ -9,6 +9,7 @@ import InterviewerHomePage from './interviewer-home-page';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../stylesheets/App.css';
 import InterviewerLandingPage from './interviewer-landing-page';
+import Schedule from './schedule'
 
 class App extends Component {
   constructor(props){
@@ -23,6 +24,43 @@ class App extends Component {
       switchNav: true
     });
   }
+  emailValidation(name, value){
+    var emailFlag = false;
+
+      if(name === 'email'){
+        var emailCheck = /[@]/;
+        var testEmail = emailCheck.test(value);
+        emailFlag = false;
+        if(testEmail){
+            this.showValid(name);
+            if(emailCheck){
+                this.emailConfirmCheck(name);
+            }
+            return;
+          }
+          this.showInvalid(name);
+          this.setState({
+              cEmailCheck: false
+          })
+      }
+      if(name === 'c_email'){
+        const {email} = this.state;
+        if(value === email){
+            this.showValid(name);
+            document.getElementsByClassName(name+"Right")[0].classList.add("showCEmail");
+            emailCheck = true;
+            this.setState({
+                cEmailCheck: true
+            });
+            return
+        }
+        this.showInvalid(name);
+        document.getElementsByClassName(name+"Right")[0].classList.remove("showCEmail");
+        this.setState({
+            cEmailCheck: false
+        });
+      }
+    }   
   render() { 
 //     <Route
 //   path='/dashboard'
@@ -38,6 +76,7 @@ class App extends Component {
         <Route path="/interviewer-signup" component={InterviewerSignup} />
         <Route path="/interviewer-info" component={InterviewerInfo} />
         <Route path="/interviewer-homepage" component={InterviewerHomePage}/>
+        <Route path="/schedule" component={Schedule}/>
       </div>
     );
 
