@@ -1,139 +1,243 @@
 import React, { Component } from 'react';
-import SelectDropDown from './helpers/select-element';
-import dummyData from './dummy-data';
+import InterviewerHomeSortOptions from './interviewer-home-sort-options';
+import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
+import axios from 'axios';
 
 class InterviewerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            elementsArr: []
+            elementsArr: [],
+            search: '',
+            department: '',
+            alphabatize: '',
+            status: '',
+            toggleSearchBar: false,
+            candidateInfo: [],
         }
-        this.getNameInfo = this.getNameInfo.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
+        this.searchBarToggle = this.searchBarToggle.bind(this);
+        this.resetCandidateList = this.resetCandidateList.bind(this);
     }
 
-    componentDidMount() {
-        this.defaultCandidateInfo();
+    componentWillMount() {
+        this.getStudentInfo();
     }
-    statusColorChange(status, statusElement){
-        if(status === 'accepted'){
-            statusElement.style.backgroundColor = "green";
-            return
+
+    async getStudentInfo() {
+        try {
+            await axios.get('http://localhost:8888/get-student-info.php').then(response => {
+                console.log("this is the response from axio call: ", response);
+                this.setState({
+                    elementsArr: response.data.data
+                });
+            });
         }
-        if(status === 'rejected'){
-            statusElement.style.backgroundColor="red";
-            return
+        catch (err) {
+            console.log("this is the error if never reach server: ", err);
         }
-        statusElement.style.backgroundColor="orange";
     }
-    defaultCandidateInfo() {
-        this.getNameInfo(dummyData[0]);
+    handleInputChange(event) {
+        const { value } = event.target;
+        this.setState({
+            search: value,
+        });
     }
-    clearPreviousCandidateInfo(elementArr, namesBackground) {
-        elementArr.map((item, index) => {
-            if (!item.namesElements) {
-                item.innerHTML = "";
+    displayCandidateSearch(arrayToSearch, container) {
+        const { search } = this.state;
+        arrayToSearch.map((item, index) => {
+            if (search === arrayToSearch.firstname || search === arrayToSearch.lastname) {
+                container.push(item);
+            }
+        })
+        return container;
+
+    }
+    handleSelectDepartment(event) {
+        const dropDownClicked = event.target;
+        const dropDownId = dropDownClicked.id;
+        switch (dropDownId) {
+            case 'sort':
+                this.setState({
+                    alphabatize: event.target.value
+                });
+                break;
+            case 'function-list':
+                this.setState({
+                    department: event.target.value
+                });
+                break;
+            case 'status':
+                this.setState({
+                    status: event.target.value
+                });
+                break;
+            default:
+                //This is where the validation would go
+                break;
+        }
+
+    }
+
+    displayByDepartment(department, status, search) {
+        const { elementsArr } = this.state;
+        var sortObj = [
+            {
+                departmentArr: [],
+                isValid: false,
+                isStatus: false,
+                isDepartment: false,
+                isSearch: false,
+                departmentFirst: false,
+                statusFirst: false
+            }
+        ];
+
+        sortObj[0].departmentArr = [];
+        sortObj[0].isValid = false;
+        sortObj[0].isStatus = false;
+        sortObj[0].isDepartment =  false;
+
+        this.resetOriginalList(department, sortObj[0].statusFirst, sortObj[0].departmentFirst);
+        this.resetOriginalList(status, sortObj[0].departmentFirst, sortObj[0].statusFirst);
+
+        elementsArr.map((item, index) => {
+            if (item.interest === department && !sortObj[0].statusFirst) {
+                sortObj[0].departmentArr.push(item);
+                sortObj[0].isValid = true;
+                this.interestAndStatusOptions(sortObj, status, sortObj[0].isStatus);
+            }
+            if(item.status === status && !sortObj[0].departmentFirst){
+                sortObj[0].departmentArr.push(item);
+                sortObj[0].isValid = true;
+                this.interestAndStatusOptions(sortObj, department, sortObj[0].isDepartment);
             }
         });
-        namesBackground.classList.remove('name-backgroundcolor');
+
+        return sortObj;
+    }
+    resetOriginalList(dropDownOption, flag1, flag2){
+        if(dropDownOption && !flag1){
+            flag2 = true;
+        }
+        if(dropDownOption === 'Default' && !flag1){
+            flag2 = false;
+            this.resetCandidateList();
+        }
+    }
+    interestAndStatusOptions(sortObj, dropDownOption, flag){
+
+
+        if (dropDownOption) {
+            flag = true;
+            if (dropDownOption === 'Default') {
+                flag = false;
+            }
+        }
+
+        if (flag) {
+            var currentArray = sortObj[0].departmentArr;
+            var statusSort = [];
+            currentArray.map((item, index) => {
+                if (item.status === dropDownOption) {
+                    statusSort.push(item);
+                }
+            });
+            sortObj[0].departmentArr = statusSort;
+        }
     }
 
-    getNameInfo(item) {
-        const { firstName, lastName, school, department, img, interviewStatus, essay1, essay2 } = item;
-        let elementVar = [];
-        var imgElement = document.getElementsByClassName('pic-class')[0];
-        var fullNameElement = document.getElementsByClassName('full-name')[0];
-        var schoolNameElement = document.getElementsByClassName('school-name')[0];
-        var statusELement = document.getElementsByClassName('status-name')[0];
-        var statusColor = document.getElementsByClassName("dot-status")[0];
-        var departmentElement = document.getElementsByClassName('function-name')[0];
-        var essay1Element = document.getElementsByClassName('essay-1-set')[0];
-        var essay2Element = document.getElementsByClassName('essay-2-set')[0];
-        var namesElements = document.getElementsByClassName('names')[0];
-        elementVar.push(imgElement, fullNameElement, schoolNameElement, statusELement, essay1Element, essay2Element, departmentElement, statusColor);
-        this.clearPreviousCandidateInfo(elementVar, namesElements);
-        this.setState({
-            elementArr: elementVar
+    mainAlphabaticalSort(sort) {
+        const { elementsArr } = this.state;
+        var sortArr = elementsArr;
+        switch(sort){
+            case 'Default':
+                break;
+            case 'A-Z':
+            case 'Z-A':
+                this.sortAlphabaticallyOrReverse(sortArr, sort);
+                break;
+            default:
+                break;
+        }
+    }
+    sortAlphabaticallyOrReverse(elementsArr, sort) {
+        elementsArr.sort((compare1, compare2) => {
+            let lastName1 = compare1.lastname.toLowerCase();
+            let lastName2 = compare2.lastname.toLowerCase()
+            if(sort === 'A-Z'){
+                if (lastName1 < lastName2) {
+                    return -1;
+                }
+                if (lastName1 > lastName2) {
+                    return 1;
+                }
+            }
+            if(sort  === 'Z-A'){
+                if (lastName1 > lastName2) {
+                    return -1;
+                }
+                if (lastName1 < lastName2) {
+                    return 1;
+                }
+            }
+
+            return 0;
         });
+    }
 
-        this.statusColorChange(interviewStatus, statusColor);
+    searchBarToggle() {
+        const { toggleSearchBar } = this.state;
+        if (toggleSearchBar) {
+            this.setState({
+                toggleSearchBar: false
+            });
+            return;
+        }
+        this.setState({
+            toggleSearchBar: true
+        });
+    }
+    displayCandidateInfo(item, index) {
+        this.setState({
+            candidateInfo: item
+        });
+  
+    }
 
-        namesElements.classList.add('name-backgroundcolor');
-
-        imgElement.setAttribute('src', img);
-
-        var fullName = document.createTextNode(`${firstName} ${lastName}`);
-        fullNameElement.appendChild(fullName);
-
-        var schoolName = document.createTextNode(`${school}`)
-        schoolNameElement.appendChild(schoolName);
-
-        var statusDisplay = document.createTextNode(`${interviewStatus}`);
-        statusELement.appendChild(statusDisplay);
-
-        var functionDisplay = document.createTextNode(`${department}`);
-        departmentElement.appendChild(functionDisplay);
-
-        var essay1Display = document.createTextNode(`${essay1}`);
-        essay1Element.appendChild(essay1Display);
-
-        var essay2Display = document.createTextNode(`${essay2}`);
-        essay2Element.appendChild(essay2Display);
+    resetCandidateList() {
+        this.setState({
+            department: 'Default',
+            status: 'Default'
+        });
+        var status = document.getElementById('status');
+        var department = document.getElementById('function-list');
+        status.value = "Default";
+        department.value = "Default";
     }
 
     render() {
-        
-        console.log("this is the state: ", this.state);
-        const candidates = dummyData.map((item, index) => {
-            const { firstName, lastName } = item;
-            return (
-                <div onClick={() => { this.getNameInfo(item) }} className="names" id={item.id}>
-                    <span>{firstName} {lastName}</span>
-                </div>
-            )
+        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
+        this.mainAlphabaticalSort(alphabatize);
+        const drop = this.displayByDepartment(department, status);
+        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr;
+        const showSearchBar = toggleSearchBar ? "showSearch" : "";
+        const displayCandidates = showArr.map((item, index) => {
+            const { firstname, lastname } = item;
+                return (
+                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} index={index}>
+                        <span>{firstname} {lastname}</span>
+                    </div>
+                )
+            
         });
-
 
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <div className="section">
-                        <div className="col s12 inner-header">
-                            <SelectDropDown id="sort" selectTitle="Alphabatize" value={['A-Z', 'Z-A']} selectClasses="col s2 sort-name-option" />
-                            <SelectDropDown id="function-list" selectTitle="Function" value={['Chems', 'Test', 'Prep', 'Janitor']} selectClasses="col s2 sort-function-option" />
-                            <SelectDropDown id="status" selectTitle="Status" value={['Pending', 'Accepted', 'Rejected']} selectClasses="col s2 sort-status-option" />
-                            <div className="col s2 right count">
-                                <h6>Count: {dummyData.length}</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="section">
-                        <div className="col s12 home-info-container">
-                            <div className="col s4 names-container">{candidates}</div>
-                            <div className="col s8 info-container">
-                                <div className="row info-header">
-                                    <div className="col s12">
-                                        <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div>
-                                        <div className="col s4 name-school">
-                                            <div className="full-name"></div>
-                                            <div className="school-name"></div>
-                                            <div className="function-name"></div>
-                                        </div>
-                                        <div className="col s3 right status-display">Status:    
-                                            <div class="dot-status"> </div><span className="status-name"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="divider"></div>
-                                <div className="row essay">
-                                    <span>Essay 1: </span><p className="essay-1-set"></p>
-                                </div>
-                                <div className="row essay">
-                                    <span>Essay 2: </span><p className="essay-2-set"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <InterviewerHomeSortOptions  elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
+                    <InterviewerHomeInfoDisplay elementsArr={elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>
             </div>
         )

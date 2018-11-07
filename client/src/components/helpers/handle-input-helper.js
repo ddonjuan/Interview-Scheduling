@@ -7,3 +7,6 @@ export function redirectLogin(){
     this.props.history.push("/interviewer-login");
 }
 
+export function createDomElement(userClassName){
+    return document.getElementsByClassName(userClassName)[0];
+}
