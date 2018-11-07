@@ -17,6 +17,11 @@ class App extends Component {
       switchNav: false
     }
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleDropDownNav = this.toggleDropDownNav.bind(this);
+  }
+  toggleDropDownNav(){
+    console.log("toggle drop down nav fired")
+    document.getElementsByClassName("dropdown-navlist")[0].classList.toggle("showNav");
   }
   toggleNavbar(){
     this.setState({
@@ -29,7 +34,7 @@ class App extends Component {
 //   render={(props) => <Dashboard {...props} isAuthed={true} />}
 // />
     const {switchNav} = this.state;
-    const header = switchNav ? <InterviewerHomeNavbar/>: <InterviewerLandingHeader/>;
+    const header = switchNav ? <InterviewerHomeNavbar toggleDropDownNav={this.toggleDropDownNav}/>: <InterviewerLandingHeader/>;
     return (
       <div className="app">
         {header}
@@ -37,7 +42,7 @@ class App extends Component {
         <Route path="/interviewer-login" render={(props)=> <InterviewerLogin {...props} switchNav={this.toggleNavbar}/>} />
         <Route path="/interviewer-signup" component={InterviewerSignup} />
         <Route path="/interviewer-info" component={InterviewerInfo} />
-        <Route path="/interviewer-homepage" component={InterviewerHomePage}/>
+        <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage switchNav={this.toggleNavbar}/>}/>
       </div>
     );
 
