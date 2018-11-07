@@ -117,12 +117,15 @@
 
 .home-nav-logo{
   font-size: 3.2em;
+  margin-left: 2%;
+  /* margin-top: 2%; */
 }
 .icon{
   display: inline-block;
 }
 .nav-items{
   margin-top: 2%;
+  margin-right: 2%;
 }
 .nav-items li:not(:last-child){
   border-right: 2px solid black;
@@ -258,4 +261,19 @@
 .no-candidates button{
   /* position: absolute;
   font-weight: 700; */
+}
+.dropdown-navlist{
+  position: absolute;
+  display: none;
+  color: white;
+  width: 10%;
+  right: 0%;
+  top: 12.6%;
+  font-size: 1.3em;
+}
+.dropdown-navlist li:nth-child(odd){
+  padding: 5%;
+}
+.showNav{
+  display: block;
 }
