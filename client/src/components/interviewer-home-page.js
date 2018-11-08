@@ -11,9 +11,9 @@ class InterviewerHomePage extends Component {
         this.state = {
             elementsArr: [],
             search: '',
-            department: '',
+            department: 'Default',
             alphabatize: '',
-            status: '',
+            status: 'Default',
             toggleSearchBar: false,
             candidateInfo: [],
         }
@@ -85,8 +85,7 @@ class InterviewerHomePage extends Component {
 
     displayByDepartment(department, status, search) {
         const { elementsArr } = this.state;
-        var sortObj = [
-            {
+        var sortObj = {
                 departmentArr: [],
                 isValid: false,
                 isStatus: false,
@@ -94,62 +93,62 @@ class InterviewerHomePage extends Component {
                 isSearch: false,
                 departmentFirst: false,
                 statusFirst: false
-            }
-        ];
-
-        sortObj[0].departmentArr = [];
-        sortObj[0].isValid = false;
-        sortObj[0].isStatus = false;
-        sortObj[0].isDepartment =  false;
-
-        this.resetOriginalList(department, sortObj[0].statusFirst, sortObj[0].departmentFirst);
-        this.resetOriginalList(status, sortObj[0].departmentFirst, sortObj[0].statusFirst);
-
-        elementsArr.map((item, index) => {
-            if (item.interest === department && !sortObj[0].statusFirst) {
-                sortObj[0].departmentArr.push(item);
-                sortObj[0].isValid = true;
-                this.interestAndStatusOptions(sortObj, status, sortObj[0].isStatus);
-            }
-            if(item.status === status && !sortObj[0].departmentFirst){
-                sortObj[0].departmentArr.push(item);
-                sortObj[0].isValid = true;
-                this.interestAndStatusOptions(sortObj, department, sortObj[0].isDepartment);
-            }
-        });
-
-        return sortObj;
-    }
-    resetOriginalList(dropDownOption, flag1, flag2){
-        if(dropDownOption && !flag1){
-            flag2 = true;
-        }
-        if(dropDownOption === 'Default' && !flag1){
-            flag2 = false;
-            this.resetCandidateList();
-        }
-    }
-    interestAndStatusOptions(sortObj, dropDownOption, flag){
-
-
-        if (dropDownOption) {
-            flag = true;
-            if (dropDownOption === 'Default') {
-                flag = false;
-            }
-        }
-
-        if (flag) {
-            var currentArray = sortObj[0].departmentArr;
-            var statusSort = [];
-            currentArray.map((item, index) => {
-                if (item.status === dropDownOption) {
-                    statusSort.push(item);
+        };
+        var firstArr = [];
+        var secondArr = [];
+ 
+        if(department !== "Default"){
+            elementsArr.map((item, index) => {
+                if (item.interest === department) {
+                    firstArr.push(item);
                 }
             });
-            sortObj[0].departmentArr = statusSort;
+        } else {
+            firstArr = elementsArr;
         }
+        if(status !== "Default"){
+            firstArr.map((item, index) =>{
+                if(item.status === status){
+                    secondArr.push(item);
+                }
+            });
+        }else {
+            secondArr = firstArr;
+        }
+        sortObj.departmentArr = secondArr;
+        return sortObj;
     }
+
+    // resetOriginalList(dropDownOption, flag1, flag2){
+    //     if(dropDownOption && !flag1){
+    //         flag2 = true;
+    //     }
+
+    //     if(dropDownOption === 'Default' && !flag1){
+    //         flag2 = false;
+    //         this.resetCandidateList();
+    //     }
+    // }
+
+    // interestAndStatusOptions(sortObj, dropDownOption, flag){
+    //     if (dropDownOption) {
+    //         flag = true;
+    //         if (dropDownOption === 'Default') {
+    //             flag = false;
+    //         }
+    //     }
+
+    //     if (flag) {
+    //         var currentArray = sortObj.departmentArr;
+    //         var statusSort = [];
+    //         currentArray.map((item, index) => {
+    //             if (item.status === dropDownOption) {
+    //                 statusSort.push(item);
+    //             }
+    //         });
+    //         sortObj.departmentArr = statusSort;
+    //     }
+    // }
 
     mainAlphabaticalSort(sort) {
         const { elementsArr } = this.state;
@@ -165,6 +164,7 @@ class InterviewerHomePage extends Component {
                 break;
         }
     }
+    
     sortAlphabaticallyOrReverse(elementsArr, sort) {
         elementsArr.sort((compare1, compare2) => {
             let lastName1 = compare1.lastname.toLowerCase();
@@ -224,12 +224,12 @@ class InterviewerHomePage extends Component {
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);
-        const showArr = drop[0].isValid ? drop[0].departmentArr : elementsArr;
+        const showArr = drop.departmentArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = showArr.map((item, index) => {
             const { firstname, lastname } = item;
                 return (
-                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} index={index}>
+                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} key={index}>
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
@@ -241,7 +241,7 @@ class InterviewerHomePage extends Component {
                 <div className="row home-inner-container">
                     <DropdownNavList/>
                     <InterviewerHomeSortOptions  elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
-                    <InterviewerHomeInfoDisplay elementsArr={elementsArr} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
+                    <InterviewerHomeInfoDisplay  resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>
             </div>
         )
