@@ -274,6 +274,13 @@
 .dropdown-navlist li:nth-child(odd){
   padding: 5%;
 }
+.dropdown-Link a{
+  padding: 5%;
+  color: white;
+}
 .showNav{
   display: block;
+}
+.hidDiv{
+  display: none;
 }

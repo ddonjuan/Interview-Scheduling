@@ -11,7 +11,6 @@ class InterviewerLandingPage extends Component {
             <div className="container">
                 <div className="center-align login-button-container">
                     <Link to="/interviewer-login" className="waves-effect waves-teal btn-large login">Log In</Link>
-                    <Link to="/interviewer-signup" className="waves-effect waves-teal btn-large signup">Sign Up</Link>
                 </div>
 
             </div>
