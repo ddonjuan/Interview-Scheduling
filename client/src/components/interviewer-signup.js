@@ -25,6 +25,7 @@ class InterviewerSignup extends Component {
             departmentCheck: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.insertNewUser = this.insertNewUser.bind(this);
         
     }
     componentWillMount(){
@@ -192,6 +193,9 @@ class InterviewerSignup extends Component {
           return false;
       }
 
+      insertNewUser(){
+          this.props.history.push("/interviewer-homepage");
+      }
 
     render() {
         this.passwordEmailConfirm();
@@ -202,7 +206,7 @@ class InterviewerSignup extends Component {
 
         return (
             <div className="container step-1-page">
-            <Modal title="Please Confirm" id="user-info" message="Are you sure you want to add this user?"/>
+            <Modal submit={this.insertNewUser} title="Please Confirm" id="user-info" message="Are you sure you want to add this user?"/>
                 <h3 className="center">Please fill out form.</h3>
                 <div className="divider"></div>
                 <form className="col s12" action="">
