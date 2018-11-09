@@ -29,9 +29,9 @@ class InterviewerLogin extends Component {
         const {userName, password} = this.state;
         console.log("this is the state afterwards: ", this.state);
         return (
-            <div className="container">
+            <div className="container login-container">
                 <div className="row">
-                    <form onSubmit={this.handleSubmit} className="col s12">
+                    <form onSubmit={this.handleSubmit} className="col s6 offset-s3">
                         <div className="row">
                             <div className="input-field col s12">
                                 <input name="userName" value={userName} onChange={this.handleInputChange} id="interviewer-login" type="text" className="validate" />
