@@ -3,7 +3,6 @@ import InterviewerHomeSortOptions from './interviewer-home-sort-options';
 import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
 import DropdownNavList from './dropdown-navlist';
 import axios from 'axios';
-import dropdownNavlist from './dropdown-navlist';
 
 class InterviewerHomePage extends Component {
     constructor(props) {
@@ -26,6 +25,7 @@ class InterviewerHomePage extends Component {
     componentWillMount() {
         this.getStudentInfo();
         this.props.switchNav();
+        this.props.hideDropDown();
     }
 
     async getStudentInfo() {
@@ -239,7 +239,7 @@ class InterviewerHomePage extends Component {
         return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    <DropdownNavList/>
+                    {/* <DropdownNavList/> */}
                     <InterviewerHomeSortOptions  elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
                     <InterviewerHomeInfoDisplay  resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
                 </div>

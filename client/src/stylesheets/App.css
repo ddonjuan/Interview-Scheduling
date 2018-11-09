@@ -284,6 +284,24 @@
 .dropdown-navlist li:nth-child(odd){
   padding: 5%;
 }
+.dropdown-Link a{
+  padding: 5%;
+  color: white;
+}
 .showNav{
+  display: block;
+}
+.hidDiv{
+  position:absolute;
+  display: none;
+}
+.showDiv{
+  color:#f44336;
+  position: absolute;
+  display: block;
+}
+.showCEmail{
+  color: rgba(87,175,63,1);
+  position: absolute;
   display: block;
 }

@@ -6,7 +6,7 @@ class SelectDropDown extends Component {
     }
 
     render() {
-        const { selectTitle, selectClasses, submit, id, value } = this.props;
+        const { selectTitle, selectClasses, submit, id, value, name } = this.props;
         const optionsElement = value.map((item, index)=>{
             return(
                 <option value={item} key={index}>{item}</option>
@@ -14,7 +14,7 @@ class SelectDropDown extends Component {
         })
         return (
             <div className={`input-field ${selectClasses}`}>
-            <select id={id} key={id} onChange={submit} className={`browser-default `} ref="function">
+            <select id={id} key={id} onChange={submit} name={name} className={`browser-default `} ref="function">
                 <option value="" disabled selected>{selectTitle}</option>
                 {optionsElement}
             </select>
