@@ -276,17 +276,28 @@
   position: absolute;
   display: none;
   color: white;
-  width: 10%;
+  width: 16%;
   right: 0%;
   top: 12.6%;
   font-size: 1.3em;
+  text-align: center;
 }
-.dropdown-navlist li:nth-child(odd){
-  padding: 5%;
+.dropdown-navlist li{
+  border: 1px solid black;
+  width: 100%;
 }
-.dropdown-Link a{
-  padding: 5%;
+.dropdown-link{
+  /* padding: 10%; */
+  margin-left: 5%;
+  /* padding-right: 10%; */
+  /* padding-left: 1%; */
+  width: 100%;
   color: white;
+  font-size: 1.2em;
+  /* height: 4%; */
+}
+.dropdown-link:hover{
+  background-color: #89c3fb;
 }
 .showNav{
   display: block;

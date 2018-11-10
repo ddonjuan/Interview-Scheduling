@@ -6,6 +6,7 @@ import InterviewerInfo from './interviewer-info';
 import InterviewerLandingHeader from './interviewer-landing-header';
 import InterviewerHomeNavbar from './interviewer-home-navbar';
 import InterviewerHomePage from './interviewer-home-page';
+import AddCandidate from './add-candidate';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../stylesheets/App.css';
 import DropdownNavList from './dropdown-navlist';
@@ -22,6 +23,11 @@ class App extends Component {
     this.toggleDropDownNav = this.toggleDropDownNav.bind(this);
     this.hideDropDown = this.hideDropDown.bind(this);
   }
+  componentDidMount(){
+    document.body.addEventListener("click", ()=>{
+      this.hideDropDown();
+    })
+  }
   // componentWillMount(){
   //   var container = document.getElementsByClassName("container");
   //   for(var i =0 ; i < container.length; i++){
@@ -29,6 +35,11 @@ class App extends Component {
   //       this.toggleDropDownNav();
   //     })
   //   }
+  // }
+  // componentWillMount(){
+  //   document.getElementsByClassName("app")[0].addEventListener("click", function(){
+  //     this.hideDropDown();
+  //   });
   // }
   toggleDropDownNav(){
     const {showNavDropDown} = this.state;
@@ -58,6 +69,7 @@ class App extends Component {
 //   path='/dashboard'
 //   render={(props) => <Dashboard {...props} isAuthed={true} />}
 // />
+
     const {switchNav} = this.state;
     const header = switchNav ? <InterviewerHomeNavbar toggleDropDownNav={this.toggleDropDownNav}/>: <InterviewerLandingHeader/>;
     return (
@@ -67,6 +79,7 @@ class App extends Component {
         {/* <Route exact path="/" component={InterviewerLandingPage} /> */}
         <Route exact path="/" render={(props)=> <InterviewerLogin {...props} switchNav={this.toggleNavbar}/>} />
         <Route path="/interviewer-signup" render={(props)=><InterviewerSignup switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
+        <Route path="/add-candidate" render={(props)=><AddCandidate switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/interviewer-info" component={InterviewerInfo} />
         <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/schedule" component={Schedule}/>

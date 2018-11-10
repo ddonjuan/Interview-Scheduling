@@ -6,33 +6,44 @@ import { showElement} from './helpers/handle-input-helper';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class InterviewerSignup extends Component {
+class AddCandidate extends Component{
     constructor(props) {
         super(props)
         this.state = {
             firstname: '',
             lastname: '',
-            username: '',
-            password: '',
-            c_password: '',
+            phone: '',
             email: '',
+            school: '',
+            yearOfGraduation: '',
             department: '',
+            cv: null,
             firstNameCheck: false,
             lastNameCheck: false,
-            usernameCheck: false,
-            passwordCheck: false,
-            c_passwordCheck: false,
+            phoneCheck: false,
             emailCheck: false,
-            departmentCheck: false
+            schoolCheck: false,
+            yearOfGraduationCheck: false,
+            departmentCheck: false,
+            cvCheck: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.insertNewUser = this.insertNewUser.bind(this);
+        this.handleUploadChange = this.handleUploadChange.bind(this);
+        // this.insertNewUser = this.insertNewUser.bind(this);
         
     }
     componentWillMount(){
         this.props.switchNav();
         this.props.hideDropDown();
     }
+    handleUploadChange(event) {
+		this.setState({
+            'cv': event.target.files[0],
+            cvCheck: true
+		})
+		document.getElementsByClassName('file-path')[0].classList.add("valid");
+		document.getElementsByClassName('file')[0].classList.add("displayFileBlock");
+	}
     handleInputChange(event){
         const {name, value} = event.target;
         this.setState({
@@ -45,15 +56,17 @@ class InterviewerSignup extends Component {
         switch(name){
             case 'firstname':
             case 'lastname':
-            case 'username':
+            case 'school':
                 this.nameInputCheck(name, value);
                 break;
-            case 'password':
-            case 'c_password':
-                this.passwordCheck(name, value);
+            case 'yearOfGraduation':
+                this.graduationCheck(name, value);
                 break;
             case 'email':
                 this.emailCheck(name, value);
+                break;
+            case 'phone':
+                this.phoneValidation(name, value);
                 break;
             case 'department':
                 this.departmentCheck(name, value);
@@ -77,9 +90,9 @@ class InterviewerSignup extends Component {
                     });
                     this.showValid(name);
                     break;
-                case 'username':
+                case 'school':
                     this.setState({
-                        usernameCheck: true
+                        schoolCheck: true
                     });
                     this.showValid(name);
                     break;
@@ -90,58 +103,21 @@ class InterviewerSignup extends Component {
         }
         this.showInvalid(name) 
     }
-
-    passwordCheck(name, value){
-        if(name === 'password'){
-            const{passwordCheck, c_password, password} = this.state;
-            let passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            let checkPassword = passwordReg.test(value);
-            if(checkPassword){
-                this.showValid(name);
-                this.setState({
-                    passwordCheck: true
-                });
-                return;
-            }
-            this.showInvalid(name);
-            this.setState({
-                passwordCheck: false,
-                c_passwordCheck: false
-            });
-
-            if(document.getElementsByClassName("c_passwordPass")[0].classList.contains("showCEmail")){
-                document.getElementsByClassName("c_passwordPass")[0].classList.remove("showCEmail");
-                this.showInvalid("c_password");
-             }
-        }
-        if(name === 'c_password'){
-            this.confirmPasswordCheck(name, value);
-        }
-    }
-    passwordEmailConfirm(){
-        const {password, c_password, passwordCheck, email, c_email, emailCheck} = this.state;
-        if(password !=='' && c_password !== '' && password === c_password && passwordCheck){
-            document.getElementsByClassName("c_passwordPass")[0].classList.add("showCEmail");
-            this.showValid("c_password");
-            return;
-        }
-    }
-    confirmPasswordCheck(name, value){
-            const {password} = this.state;
-            if(value === password && this.state.passwordCheck){
-                this.setState({
-                    c_passwordCheck: true
-                });
-                this.showValid(name);
-                document.getElementsByClassName(name+"Pass")[0].classList.add("showCEmail");
-                return
-            }
-            this.setState({
-                c_passwordCheck: false
-            });
-            this.showInvalid(name);
-            document.getElementsByClassName(name+"Pass")[0].classList.remove("showCEmail");
-    }
+    phoneValidation(name, value){
+		var phoneNumTest = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+		var regTest = phoneNumTest.test(value)
+		if(regTest){
+			this.showValid(name);
+			this.setState({
+				phoneCheck: true
+			});
+			return
+		}
+		this.showInvalid(name);
+		this.setState({
+			phoneCheck: false
+		});
+  }
 
     showValid(name){
         document.getElementById(name).classList.remove("invalid", "showDiv");
@@ -153,6 +129,17 @@ class InterviewerSignup extends Component {
         document.getElementById(name).classList.remove("valid");
         document.getElementById(name).classList.add("invalid");
         document.getElementsByClassName(name)[0].classList.add("showDiv");
+      }
+      graduationCheck(name, value){
+          if(value){
+              this.setState({
+                  yearOfGraduationCheck: true
+              });
+              return;
+          }
+          this.setState({
+              yearOfGraduation: false
+          });
       }
 
       departmentCheck(name, value){
@@ -187,40 +174,48 @@ class InterviewerSignup extends Component {
           }
       }
       checkAllValidations(){
-          const { firstNameCheck, lastNameCheck, usernameCheck, passwordCheck, c_passwordCheck, emailCheck, departmentCheck} = this.state;
-          if(firstNameCheck && lastNameCheck && usernameCheck && passwordCheck && c_passwordCheck && emailCheck && departmentCheck){
+          const { firstNameCheck, lastNameCheck, schoolCheck, yearOfGraduationCheck, emailCheck, departmentCheck, cvCheck} = this.state;
+          if(firstNameCheck && lastNameCheck && schoolCheck && yearOfGraduationCheck && cvCheck && emailCheck && departmentCheck){
               return true;
           }
           return false;
       }
-
-      insertNewUser(){
-          this.props.history.push("/interviewer-homepage");
-      }
-
-    render() {
-        console.log("this is the state: ", this.state);
-        this.passwordEmailConfirm();
+    render(){
+        const {firstname, lastname, phone, email, school, yearOfGraduation, department, cv, cv_name} = this.state;
         const enableSubmit = this.checkAllValidations();
         const submitButton = enableSubmit ? <button onClick={()=>{showElement('user-info')}}className="waves-effect waves-light btn-large">Create</button> : <button className="btn-large disabled">Create</button>;
-        const { inputChange, uploadChange } = this.props;
-        const { firstname, lastname, username, password, email, c_password, firstNameCheck, lastNameCheck, usernameCheck, passwordCheck, emailCheck, departmentCheck} = this.state;
-
-        return (
+        console.log("this is the state: ", this.state);
+        return(
             <div className="container step-1-page">
-            <Modal submit={this.insertNewUser} title="Please Confirm" id="user-info" message="Are you sure you want to add this user?"/>
-                <h3 className="center">Complete the Form to Add User</h3>
+            <Modal submit={this.insertNewUser} title="Please Confirm" id="user-info" message="Are you sure you want to add this candidate?"/>
+                <h3 className="center">Complete Form to Add Candidate</h3>
                 <div className="divider"></div>
                 <form className="col s12" action="">
 
                     <div className="row">
                         <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={firstname} name="firstname" type="text" labelTitle="First Name" errorMessage="Invalid Input. First name must contain at least one character"/>
                         <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={lastname} name="lastname" type="text" labelTitle="Last Name" errorMessage="Invalid Input. Last name must contain at least one character"/>
+                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={phone} name="phone" type="text" labelTitle="Phone Number" errorMessage="Invalid Input. Field must contain a total of 10 digits including area code with the exception of '()' and '-'"/>
                         <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={email} name="email" type="email" labelTitle="Email" errorMessage="Invalid Input. Email must contain '@'"/>
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={username} name="username" type="text" labelTitle="User Name" errorMessage="Invalid Input. User Name must contain at least one character"/>
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={password} name="password" type="password" labelTitle="Password" errorMessage="Invalid Password. Must contain at least 8 characters, 1 number, 1 uppercase characeter, and 1 special character"/>
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={c_password} name="c_password" type="password" labelTitle="Confirm Password" errorMessage="Passwords do not match" secondErrorClass="c_passwordPass" secondErrorMessage="Passwords Match"/>
+                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={school} name="school" type="text" labelTitle="School" errorMessage="Invalid Input. School must contain at least one character"/>
+                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={yearOfGraduation} name="yearOfGraduation" type="month" labelTitle="Year of Graduation" errorMessage="Invalid. Field must have a date"/>
                         <SelectDropDown id="department" name="department" submit={this.handleInputChange} selectTitle="Department" value={['Default', 'Clinical Development', 'Medical Affairs', 'Global Regulatory Affairs', 'Clinical Pharmacology']} selectClasses="col s3 sort-function-option" />
+                        
+                    </div>
+                    <div className="row">
+                        <div className="file-field input-field">
+                            <label for="btn" className="active">Upload CV/Resume</label>
+                            <br/>
+                            <div className="btn" name="btn">
+                                <span>File</span>
+                                <input type="file" onChange={this.handleUploadChange}/>
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input type="text" id="file-path" className="file-path" value={cv ? cv.name : ''} onChange={this.handleInputChange} placeholder="Select a file from your computer"/>
+                            </div>
+                            <div className="hidDivBlock file">File Successfully Uploaded</div>
+
+                        </div>
                     </div>
                 </form>
                 <div className="row">
@@ -228,8 +223,7 @@ class InterviewerSignup extends Component {
                         {submitButton}
                     </div>
                 </div>
-            </div>
-        )
+            </div>        )
     }
 }
-export default InterviewerSignup;
+export default AddCandidate;
