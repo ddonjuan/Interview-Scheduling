@@ -12,6 +12,9 @@
   margin-top: 0%;
   font-size: 3.2em;
 }
+
+
+/* LOGIN PAGE START */
 .login-button-container{
   width: 90%;
   height: 90%;
@@ -24,6 +27,9 @@
   margin: 0 auto;
   margin-top: 3%;
   font-weight: 700;
+}
+.login-container{
+  margin-top: 50px;
 }
 .interviewer-signup{
   margin-top: 5%;
@@ -46,6 +52,10 @@
   text-align-last: center;
 
 }
+/* LOGIN PAGE END */
+
+
+
 .drop-down-button{
   height: 40px;
   width: 62px;
