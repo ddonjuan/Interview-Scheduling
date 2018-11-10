@@ -11,9 +11,11 @@ class DropdownNavList extends Component{
         return(
             <div className="container">
                 <ul className={`dropdown-navlist blue ${showNav}`}>
-                    <li>Profile</li>
+                    <Link to="/interviewer-homepage" className="dropdown-link">Home</Link>
                     <li class="divider" tabindex="-1"></li>
                     <Link to="/interviewer-signup" className="dropdown-link">Add User</Link>
+                    <li class="divider" tabindex="-1"></li>
+                    <Link to="/add-candidate" className="dropdown-link">Add Candidate</Link>
                 </ul>
             </div>
         )
