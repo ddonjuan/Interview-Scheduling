@@ -1,10 +1,15 @@
 <?php
 require('./cross-origin.php');
 require('./header.php');
-$password = "test";
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata,true);
+$query = $request['query'];
+
 $stmt = $conn->prepare("SELECT `hashpassword` FROM `user` WHERE `username` = ?");
 $stmt->bind_param("s", $username);
-$username = "test";
+
+$username = $query['userName'];
+$password = $query['password'];
 $stmt->execute();
 $result = $stmt->get_result();
 $output['success'] = false;
@@ -17,10 +22,10 @@ if($result->num_rows !== 0){
         $output['success'] = true;
         //create token and store token
     } else {
-        $output['error'] = "Invalid Username or Password";
+        $output['error'] = "Invalid Password";
     }
 } else {
-    $output['error'] = "Invalid Username or Password";
+    $output['error'] = "Invalid Username";
 }
 $stmt->close();
 $conn->close();
