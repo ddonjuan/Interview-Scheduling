@@ -14,6 +14,7 @@ class InterviewerHomePage extends Component {
             alphabatize: '',
             status: 'Default',
             toggleSearchBar: false,
+            isSearch: false,
             candidateInfo: [],
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -163,12 +164,15 @@ class InterviewerHomePage extends Component {
         const { toggleSearchBar } = this.state;
         if (toggleSearchBar) {
             this.setState({
-                toggleSearchBar: false
+                toggleSearchBar: false,
+                isSearch: false
             });
+            document.getElementsByClassName("search-bar")[0].value = "";
             return;
         }
         this.setState({
-            toggleSearchBar: true
+            toggleSearchBar: true,
+            isSearch: true
         });
     }
     displayCandidateInfo(item, index) {
@@ -195,7 +199,9 @@ class InterviewerHomePage extends Component {
     resetCandidateList() {
         this.setState({
             department: 'Default',
-            status: 'Default'
+            status: 'Default',
+            search: '',
+            toggleSearchBar: false
         });
         var status = document.getElementById('status');
         var department = document.getElementById('function-list');
@@ -204,6 +210,7 @@ class InterviewerHomePage extends Component {
     }
 
     render() {
+        console.log("this is the state: ", this.state);
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);
