@@ -21,6 +21,8 @@ if($result->num_rows !== 0){
     if($valid){
         $output['success'] = true;
         //create token and store token
+        require_once('jwt.php');
+        $output['token'] = $jwt;
     } else {
         $output['error'] = "Invalid Password";
     }
