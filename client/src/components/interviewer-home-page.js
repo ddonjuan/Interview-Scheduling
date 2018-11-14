@@ -16,11 +16,13 @@ class InterviewerHomePage extends Component {
             toggleSearchBar: false,
             isSearch: false,
             candidateInfo: [],
+            candidatesDisplayed: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
         this.resetCandidateList = this.resetCandidateList.bind(this);
+        this.defaultCandidateDisplay = this.defaultCandidateDisplay.bind(this);
     }
 
     componentWillMount() {
@@ -182,18 +184,43 @@ class InterviewerHomePage extends Component {
   
     }
 
+
     search(candidateList){
         const {toggleSearchBar, search} = this.state;
+        var searchLowerCase = '';
+        var searchLowerCaseArr = [];
+        searchLowerCase += search.toLowerCase();
         if(toggleSearchBar && search !== ''){
             var searchArr = [];
             candidateList.map((item, index)=>{
-                if(search === `${item.firstname} ${item.lastname}` || item.firstname === search || item.lastname === search){
+                searchLowerCaseArr.push(`${item.firstname.toLowerCase()} ${item.lastname.toLowerCase()}`, index);
+                if(item.firstname.indexOf(searchLowerCase) > -1){
                     searchArr.push(item);
                 }
             });
+            console.log("this is the searchLowerCase: ", searchLowerCaseArr)
             return searchArr;
         }
         return false;
+    }
+    candidatesDisplaying(candidatesArr){
+        if(candidatesArr.length === 0){
+            return false;
+        }
+        return true;
+    }
+    defaultCandidateDisplay(candidate, index){
+        if(index === 0){
+            const {firstname, lastname, school, status, essay1, essay2, interest} = candidate;
+            document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
+            document.getElementsByClassName("school-name")[0].innerHTML = school;
+            document.getElementsByClassName("function-name")[0].innerHTML = interest;
+            document.getElementsByClassName("status-name")[0].innerHTML = status;
+            document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
+            document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
+        return;
+        }
+        return;
     }
 
     resetCandidateList() {
@@ -210,7 +237,6 @@ class InterviewerHomePage extends Component {
     }
 
     render() {
-        console.log("this is the state: ", this.state);
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);
@@ -218,7 +244,8 @@ class InterviewerHomePage extends Component {
         const searchCandidates = this.search(showArr);
         const finalDisplay = searchCandidates ? searchCandidates : showArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
-        const displayCandidates = finalDisplay.map((item, index) => {
+        const displayCandidates = finalDisplay.map((item, index, arr) => {
+            this.defaultCandidateDisplay(item, index);
             const { firstname, lastname } = item;
                 return (
                     <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} key={index}>
