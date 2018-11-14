@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import M from 'materialize-css';
+// import M from 'materialize-css';
 
 
 class InterviewerHomeInfoDisplay extends Component {
     constructor(props) {
         super(props);
     }
-    toastFunction(){
-        M.toast({html: 'There are no candidates to display'})
-    }
 
     render() {
         const { displayCandidates, candidateInfo, resetCandidateList } = this.props;
         // console.log("this is the caniddate info in the home info display $*$*$*$*: ", showArr);
         const {firstname, lastname, status, school, essay1, essay2, interest} = candidateInfo;
-        const errorCandidates = displayCandidates.length === 0 ? <div onClick={this.toastFunction()} className="no-candidates"> <div>There are no candidates to display</div><button onClick={()=>{resetCandidateList()}} className="waves-effect waves-light blue btn-large">Reset Candidates List</button> </div> : displayCandidates
+        const errorCandidates = displayCandidates.length === 0 ? <div className="no-candidates"> <div>There are no candidates to display</div><button onClick={()=>{resetCandidateList()}} className="waves-effect waves-light blue btn-large">Reset Candidates List</button> </div> : displayCandidates
 
         return (
             <div className="section">
