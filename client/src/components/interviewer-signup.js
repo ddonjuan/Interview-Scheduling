@@ -194,8 +194,17 @@ class InterviewerSignup extends Component {
           return false;
       }
 
-      insertNewUser(){
-          this.props.history.push("/interviewer-homepage");
+      async insertNewUser(){
+        const {firstname, lastname, email, username, password} = this.state;
+        var query = { firstname, lastname, email, username, password };
+        await axios.post("http://localhost:8888/create-user.php", query).then(response => {
+            console.log("AXIOS RESPONSE",response);
+            if(response.data.success){
+                console.log("User Created")
+            } else {
+                console.log("Failed to create user");
+            }
+        });
       }
 
     render() {
