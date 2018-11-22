@@ -8,11 +8,14 @@ class InterviewerHomeInfoDisplay extends Component {
     }
 
     render() {
-        const { displayCandidates, candidateInfo, resetCandidateList } = this.props;
+        const { displayCandidates, candidateInfo, resetCandidateList} = this.props;
         // console.log("this is the caniddate info in the home info display $*$*$*$*: ", showArr);
-        const {firstname, lastname, status, school, essay1, essay2, interest} = candidateInfo;
+        const {firstname, lastname, status, school, essay1, essay2, interest, id} = candidateInfo;
         const errorCandidates = displayCandidates.length === 0 ? <div className="no-candidates"> <div>There are no candidates to display</div><button onClick={()=>{resetCandidateList()}} className="waves-effect waves-light blue btn-large">Reset Candidates List</button> </div> : displayCandidates
+        // if(id !== undefined){
+        //     document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
 
+        // }
         return (
             <div className="section">
                 <div className="col s12 home-info-container">
@@ -26,8 +29,9 @@ class InterviewerHomeInfoDisplay extends Component {
                                     <div className="school-name">{school}</div>
                                     <div className="function-name">{interest}</div>
                                 </div>
-                                <div className="col s3 right status-display">Status:
-                                <div className="dot-status"> </div><span className="status-name">{status}</span>
+                                <div className="col s3 right status-display">
+                                    <button id={id} key={id} onClick={this.props.itemNow} className="waves-effect waves-light blue btn-large interview-button">Interview</button>
+                                {/* <div className="dot-status"> </div><span className="status-name">{status}</span> */}
                                 </div>
                             </div>
                         </div>
