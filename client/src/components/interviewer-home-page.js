@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InterviewerHomeSortOptions from './interviewer-home-sort-options';
 import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
 import DropdownNavList from './dropdown-navlist';
+import Loader from './loader.js';
 import axios from 'axios';
 
 class InterviewerHomePage extends Component {
@@ -16,9 +17,13 @@ class InterviewerHomePage extends Component {
             toggleSearchBar: false,
             isSearch: false,
             candidateInfo: [],
-            candidatesDisplayed: false
+            candidateIndex: null,
+            candidatesDisplayed: false,
+            potentialEmployees: []
         }
+        this.itemToSwitch = this.itemToSwitch.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.displayCandidateInfo = this.displayCandidateInfo.bind(this);
         this.handleSelectDepartment = this.handleSelectDepartment.bind(this);
         this.searchBarToggle = this.searchBarToggle.bind(this);
         this.resetCandidateList = this.resetCandidateList.bind(this);
@@ -31,12 +36,12 @@ class InterviewerHomePage extends Component {
         this.props.hideDropDown();
     }
 
-    async getStudentInfo() {
+   async getStudentInfo() {
         try {
             await axios.get('http://localhost:8888/get-student-info.php').then(response => {
                 console.log("this is the response from axio call: ", response);
                 this.setState({
-                    elementsArr: response.data.data
+                    elementsArr: response.data.data,
                 });
             });
         }
@@ -177,11 +182,11 @@ class InterviewerHomePage extends Component {
             isSearch: true
         });
     }
-    displayCandidateInfo(item, index) {
+    displayCandidateInfo(item, index, event) {
         this.setState({
-            candidateInfo: item
+            candidateInfo: item,
+            candidateIndex: index
         });
-  
     }
 
 
@@ -198,7 +203,7 @@ class InterviewerHomePage extends Component {
                     searchArr.push(item);
                 }
             });
-            console.log("this is the searchLowerCase: ", searchLowerCaseArr)
+            console.log("this is the searchLowerCase: ", searchLowerCaseArr, searchArr)
             return searchArr;
         }
         return false;
@@ -209,18 +214,19 @@ class InterviewerHomePage extends Component {
         }
         return true;
     }
-    defaultCandidateDisplay(candidate, index){
-        if(index === 0){
-            const {firstname, lastname, school, status, essay1, essay2, interest} = candidate;
-            document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
-            document.getElementsByClassName("school-name")[0].innerHTML = school;
-            document.getElementsByClassName("function-name")[0].innerHTML = interest;
-            document.getElementsByClassName("status-name")[0].innerHTML = status;
-            document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
-            document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
-        return;
-        }
-        return;
+    defaultCandidateDisplay(candidates){
+        //have to make flags that detect when none of the filters have been selected and when they are at default
+        //that way it doesn't keep going back to the first element everytime you click on another element twice
+        candidates.map((item, index, array)=>{
+                const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
+                document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
+                document.getElementsByClassName("school-name")[0].innerHTML = school;
+                document.getElementsByClassName("function-name")[0].innerHTML = interest;
+                document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
+                document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
+                document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
+            return;
+        });
     }
 
     resetCandidateList() {
@@ -236,8 +242,14 @@ class InterviewerHomePage extends Component {
         department.value = "Default";
     }
 
+    itemToSwitch(event){
+        event.preventDefault();
+        var myElement = event.target.parentNode;
+        console.log("this is the event: ", myElement);
+        return;
+    }
     render() {
-        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search } = this.state;
+        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search, showLoader} = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);
         const showArr = drop.departmentArr;
@@ -245,22 +257,20 @@ class InterviewerHomePage extends Component {
         const finalDisplay = searchCandidates ? searchCandidates : showArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = finalDisplay.map((item, index, arr) => {
-            this.defaultCandidateDisplay(item, index);
             const { firstname, lastname } = item;
                 return (
-                    <div onClick={() => { this.displayCandidateInfo(item, index) }} className="names" id={item.id} key={index}>
+                    <div onClick={() => { this.displayCandidateInfo(item, index)}} className="names" id={item.id} key={index}>
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
-            
         });
-
-        return (
+            this.defaultCandidateDisplay(finalDisplay);
+            return (
             <div className="container home-container">
                 <div className="row home-inner-container">
                     {/* <DropdownNavList/> */}
                     <InterviewerHomeSortOptions  elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
-                    <InterviewerHomeInfoDisplay  resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} />
+                    <InterviewerHomeInfoDisplay  resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} itemNow={this.itemToSwitch}/>
                 </div>
             </div>
         )

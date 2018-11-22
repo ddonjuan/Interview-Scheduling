@@ -213,7 +213,9 @@
 }
 .status-display{
   font-size: 1.3em;
+  margin-top: 2%; 
 }
+
 .dot-status{
   display: inline-block;
   margin-left: 8%;
@@ -315,4 +317,24 @@
   color: rgba(87,175,63,1);
   position: absolute;
   display: block;
+}
+.swimming-lanes{
+  height: 100%;
+}
+.lanes-container{
+  height: 100%;
+}
+.lanes{
+  border-right: 1px solid black;
+  height: 100%;
+}
+.loader{
+  position: absolute;
+  z-index: 5;
+}
+
+.candidate-button-progress{
+  width: 100%;
+  margin: 1%;
+  margin-bottom: 4%;
 }
