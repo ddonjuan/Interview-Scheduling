@@ -338,3 +338,6 @@
   margin: 1%;
   margin-bottom: 4%;
 }
+.modal-content-custom.candidate-info{
+  margin: none;
+}
