@@ -2,13 +2,13 @@
 require('./cross-origin.php');
 require('./header.php');
 
+$output['success'] = false;
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $output['error'] = $conn->connect_error;
 }
 
 $query1 = "SELECT `id`, `firstname`, `lastname`, `status` FROM `candidate` WHERE `status` = 1";
 $result1 = mysqli_query($conn, $query1);
-$output['success'] = false;
 if (mysqli_num_rows($result1) > 0) {
     $output['success'] = true;
     while($row = mysqli_fetch_assoc($result1)) {
