@@ -197,7 +197,7 @@ class InterviewerSignup extends Component {
       async insertNewUser(){
         const {firstname, lastname, email, username, password} = this.state;
         var query = { firstname, lastname, email, username, password };
-        await axios.post("http://localhost:8888/create-user.php", query).then(response => {
+        await axios.post("http://localhost:8888/php/create-user.php", query).then(response => {
             console.log("AXIOS RESPONSE",response);
             if(response.data.success){
                 console.log("User Created")
