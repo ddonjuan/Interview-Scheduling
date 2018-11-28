@@ -38,7 +38,7 @@ class InterviewerHomePage extends Component {
 
    async getStudentInfo() {
         try {
-            await axios.get('http://localhost:8888/get-student-info.php').then(response => {
+            await axios.get('http://localhost:8888/php/get-student-info.php').then(response => {
                 console.log("this is the response from axio call: ", response);
                 this.setState({
                     elementsArr: response.data.data,
