@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import StudentModal from './helpers/student-modal';
 import { showElement } from './helpers/handle-input-helper';
+import axios from 'axios';
 
 import dummyData from './dummy-data';
 
@@ -11,14 +12,33 @@ class CandidateProgress extends Component{
             candidate: [],
             firstInterview: [],
             secondInterview: [],
-            acceptedCandidates: []
+            acceptedCandidates: [],
         }
         this.candidatesToScreen = this.candidatesToScreen.bind(this);
     }
     componentWillMount(){
         this.props.switchNav();
         this.props.hideDropDown();
+        this.getPoolInfo();
     }
+
+    async getPoolInfo() {
+        try {
+            await axios.get('http://localhost:8888/php/get-swimming-lane.php').then(response => {
+                console.log("this is the response from axio call: ", response);
+                this.setState({
+                    candidate: response.data.data[1],
+                    firstInterview: response.data.data[2],
+                    secondInterview: response.data.data[3],
+                    acceptedCandidates: response.data.data[4]
+                });
+            });
+        }
+        catch (err) {
+            console.log("this is the error if never reach server: ", err);
+        }
+    }
+
     candidatesToScreen(item, index){
         this.setState({
             candidate: item
@@ -48,26 +68,26 @@ class CandidateProgress extends Component{
 
     render(){
         const {candidate, firstInterview, secondInterview, acceptedCandidates} = this.state;
-        const {firstname, lastname, essay1, essay2, school, department} = candidate;
-        const candidates = dummyData.map((item, index)=>{
+        // const {firstname, lastname, essay1, essay2, school, department} = candidate;
+        const candidates = this.state.candidate.map((item, index)=>{
             const {firstname, lastname, id} = item;
             return(
                 <button data={item} onClick={()=>{this.candidatesToScreen(item)}} className="waves-effect waves-light orange btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
             )
         })
-        const candidatesRound1 = dummyData.map((item, index)=>{
+        const candidatesRound1 = this.state.firstInterview.map((item, index)=>{
             const {firstname, lastname, id} = item;
             return(
                 <button data={item} onClick={()=>{this.sendCandidatesToFirstInterview(item)}} className="waves-effect waves-light blue btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
             )
         })
-        const candidatesRound2 = dummyData.map((item, index)=>{
+        const candidatesRound2 = this.state.secondInterview.map((item, index)=>{
             const {firstname, lastname, id} = item;
             return(
                 <button data={item} onClick={()=>{this.sendCandidatesToSecondInterview(item)}} className="waves-effect waves-light blue btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
             )
         })
-        const acceptedCandidatesFinal = dummyData.map((item, index)=>{
+        const acceptedCandidatesFinal = this.state.acceptedCandidates.map((item, index)=>{
             const {firstname, lastname, id} = item;
             return(
                 <button data={item} onClick={()=>{this.acceptedCandidates(item)}} className="waves-effect waves-light green btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
@@ -75,10 +95,10 @@ class CandidateProgress extends Component{
         })
         return(
             <div className="container swimming-lanes">
-            <StudentModal id="candidates-to-screen" title={"Are you sure you want to send this candidate to the First Interview?"} name={`${firstname} ${lastname}`} department={department} school={school}/>
+            {/* <StudentModal id="candidates-to-screen" title={"Are you sure you want to send this candidate to the First Interview?"} name={`${firstname} ${lastname}`} department={department} school={school}/>
             <StudentModal id="first-interview" title={"Are you sure you want to send this candidate to the Second Interview?"} name={`${firstInterview.firstname} ${firstInterview.lastname}`} department={firstInterview.department} school={firstInterview.school}/>
             <StudentModal id="second-interview" title={"Do you want to hire this candidates?"} name={`${secondInterview.firstname} ${secondInterview.lastname}`} department={secondInterview.department} school={secondInterview.school}/>
-            <StudentModal id="accepted-candidates" title={"Hired"} name={`${acceptedCandidates.firstname} ${acceptedCandidates.lastname}`} department={acceptedCandidates.department} school={acceptedCandidates.school}/>
+            <StudentModal id="accepted-candidates" title={"Hired"} name={`${acceptedCandidates.firstname} ${acceptedCandidates.lastname}`} department={acceptedCandidates.department} school={acceptedCandidates.school}/> */}
                 <div className="row">
                     <div className="col s12 lanes-title">
                         <div className="col s3 lanes">Potential Employees <div className="divider"></div> </div>

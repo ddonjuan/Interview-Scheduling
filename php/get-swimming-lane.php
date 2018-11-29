@@ -12,7 +12,7 @@ $result1 = mysqli_query($conn, $query1);
 if (mysqli_num_rows($result1) > 0) {
     $output['success'] = true;
     while($row = mysqli_fetch_assoc($result1)) {
-    	$output['data'][][] = $row;
+    	$output['data'][1][] = $row;
     }
 } else {
 	$output['message'] = "0 results in 1";
@@ -24,7 +24,7 @@ $output['success'] = false;
 if (mysqli_num_rows($result2) > 0) {
     $output['success'] = true;
     while($row = mysqli_fetch_assoc($result2)) {
-    	$output['data'][][] = $row;
+    	$output['data'][2][] = $row;
     }
 } else {
 	$output['message'] = "0 results in 2";
@@ -36,7 +36,7 @@ $output['success'] = false;
 if (mysqli_num_rows($result3) > 0) {
     $output['success'] = true;
     while($row = mysqli_fetch_assoc($result3)) {
-    	$output['data'][][] = $row;
+    	$output['data'][3][] = $row;
     }
 } else {
 	$output['message'] = "0 results in 3";
@@ -48,7 +48,7 @@ $output['success'] = false;
 if (mysqli_num_rows($result4) > 0) {
     $output['success'] = true;
     while($row = mysqli_fetch_assoc($result4)) {
-    	$output['data'][][] = $row;
+    	$output['data'][4][] = $row;
     }
 } else {
 	$output['message'] = "0 results in 4";
