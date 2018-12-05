@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import StudentModal from './helpers/student-modal';
 import { showElement } from './helpers/handle-input-helper';
+import NameOptions from './helpers/progress-name-options';
 import axios from 'axios';
 
 import dummyData from './dummy-data';
@@ -38,7 +39,10 @@ class CandidateProgress extends Component{
             console.log("this is the error if never reach server: ", err);
         }
     }
-
+    grabLastNameInitial(name){
+        var lastNameInitial = name.substring(1,0);
+        return lastNameInitial+'.';
+    }
     candidatesToScreen(item, index){
         this.setState({
             candidate: item
@@ -71,26 +75,30 @@ class CandidateProgress extends Component{
         // const {firstname, lastname, essay1, essay2, school, department} = candidate;
         const candidates = this.state.candidate.map((item, index)=>{
             const {firstname, lastname, id} = item;
+            const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <button data={item} onClick={()=>{this.candidatesToScreen(item)}} className="waves-effect waves-light orange btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
+                <NameOptions addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next"/>
             )
         })
         const candidatesRound1 = this.state.firstInterview.map((item, index)=>{
             const {firstname, lastname, id} = item;
+            const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <button data={item} onClick={()=>{this.sendCandidatesToFirstInterview(item)}} className="waves-effect waves-light blue btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
+                <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
             )
         })
         const candidatesRound2 = this.state.secondInterview.map((item, index)=>{
             const {firstname, lastname, id} = item;
+            const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <button data={item} onClick={()=>{this.sendCandidatesToSecondInterview(item)}} className="waves-effect waves-light blue btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
+                <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
             )
         })
         const acceptedCandidatesFinal = this.state.acceptedCandidates.map((item, index)=>{
             const {firstname, lastname, id} = item;
+            const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <button data={item} onClick={()=>{this.acceptedCandidates(item)}} className="waves-effect waves-light green btn candidate-button-progress">{`${firstname} ${lastname}`}</button>
+                <NameOptions addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="navigate_before"/>
             )
         })
         return(
