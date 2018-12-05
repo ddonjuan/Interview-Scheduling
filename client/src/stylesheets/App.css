@@ -334,10 +334,41 @@
 }
 
 .candidate-button-progress{
-  width: 100%;
+  width: 50%;
   margin: 1%;
   margin-bottom: 4%;
+  display: inline-block;
 }
 .modal-content-custom.candidate-info{
   margin: none;
+}
+.hide-icons, .name-info-option{
+  display: none;
+}
+.name-info-option{
+  display: none;
+  text-align: center;
+  border-radius: 5%;
+  box-shadow: 0 0 3px 0.2px rgba(0,0,0,.8);
+  margin-left: 5%;
+  margin-bottom: 5%;
+  color:white; 
+  width: 40%;
+}
+.material-icons{
+  position:relative;
+  cursor: pointer;
+  top:1%;
+}
+.name-options-container:hover .hide-icons{
+  display: inline-block;
+}
+.name-options-container:hover .name-info-option{
+  display: inline-block;
+}
+.interview1Info{
+  margin-left: 30%;
+}
+.hiredInfo{
+  margin-left: 30%;
 }
