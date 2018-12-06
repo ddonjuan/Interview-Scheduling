@@ -107,20 +107,20 @@ class CandidateProgress extends Component{
             <StudentModal id="first-interview" title={"Are you sure you want to send this candidate to the Second Interview?"} name={`${firstInterview.firstname} ${firstInterview.lastname}`} department={firstInterview.department} school={firstInterview.school}/>
             <StudentModal id="second-interview" title={"Do you want to hire this candidates?"} name={`${secondInterview.firstname} ${secondInterview.lastname}`} department={secondInterview.department} school={secondInterview.school}/>
             <StudentModal id="accepted-candidates" title={"Hired"} name={`${acceptedCandidates.firstname} ${acceptedCandidates.lastname}`} department={acceptedCandidates.department} school={acceptedCandidates.school}/> */}
-                <div className="row">
-                    <div className="col s12 lanes-title">
-                        <div className="col s3 lanes">Potential Employees <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Interview 1 <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Interview 2 <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Hired <div className="divider"></div> </div>
+                {/* <div className="row"> */}
+                    <div className="lanes-title">
+                        <div className="lanes">Potential Employees <div className="divider"></div> </div>
+                        <div className="lanes">Interview 1 <div className="divider"></div> </div>
+                        <div className="lanes">Interview 2 <div className="divider"></div> </div>
+                        <div className="lanes">Hired <div className="divider"></div> </div>
                     </div>
-                    <div className="col s12 candidate-lanes">
-                        <div className="col s3 lanes potential">{candidates}</div>
-                        <div className="col s3 lanes potential">{candidatesRound1}</div>
-                        <div className="col s3 lanes potential">{candidatesRound2}</div>
-                        <div className="col s3 lanes potential">{acceptedCandidatesFinal}</div>
+                    <div className="candidate-lanes">
+                        <div className="lanes potential">{candidates}</div>
+                        <div className="lanes potential">{candidatesRound1}</div>
+                        <div className="lanes potential">{candidatesRound2}</div>
+                        <div className="clanes potential">{acceptedCandidatesFinal}</div>
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         )
     }
