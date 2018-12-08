@@ -319,22 +319,48 @@
   display: block;
 }
 .swimming-lanes{
-  height: 100%;
+  height: 85%;
+  border: 1px solid black;
 }
-.lanes-container{
-  height: 100%;
+.candidate-lanes{
+  overflow: scroll;
+  height: 84.4%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+}
+.lanes-title{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  text-align: center;
 }
 .lanes{
-  border-right: 1px solid black;
-  height: 100%;
+  /* border-right: 1px solid black; */
+  text-align: center;
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 25%;
+}
+.clanes{
+  /* border-right: 1px solid black; */
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
 }
 .loader{
   position: absolute;
   z-index: 5;
 }
+/* .potential{
+  display:flex;
+  width: 100%;
+  justify-content: space-evenly;
+  text-align: center;
+} */
 
 .candidate-button-progress{
-  width: 50%;
+  width: 60%;
   margin: 1%;
   margin-bottom: 4%;
   display: inline-block;
@@ -345,6 +371,9 @@
 .hide-icons, .name-info-option{
   display: none;
 }
+/* .hide-arrow{
+  visibility: none;
+} */
 .name-info-option{
   display: none;
   text-align: center;
@@ -360,15 +389,18 @@
   cursor: pointer;
   top:1%;
 }
+.name-options-container{
+  width: 100%;
+}
 .name-options-container:hover .hide-icons{
   display: inline-block;
 }
 .name-options-container:hover .name-info-option{
   display: inline-block;
 }
-.interview1Info{
+/* .interview1Info{
+  margin-left: 20%;
+} */
+/* .hiredInfo{
   margin-left: 30%;
-}
-.hiredInfo{
-  margin-left: 30%;
-}
+} */

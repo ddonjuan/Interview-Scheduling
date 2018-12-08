@@ -77,7 +77,7 @@ class CandidateProgress extends Component{
             const {firstname, lastname, id} = item;
             const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <NameOptions addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next"/>
+                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="navigate_before" rightArrow="navigate_next"/>
             )
         })
         const candidatesRound1 = this.state.firstInterview.map((item, index)=>{
@@ -98,11 +98,11 @@ class CandidateProgress extends Component{
             const {firstname, lastname, id} = item;
             const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <NameOptions addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="navigate_before"/>
+                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
             )
         })
         return(
-            <div className="container swimming-lanes">
+            <div className="swimming-lanes">
             {/* <StudentModal id="candidates-to-screen" title={"Are you sure you want to send this candidate to the First Interview?"} name={`${firstname} ${lastname}`} department={department} school={school}/>
             <StudentModal id="first-interview" title={"Are you sure you want to send this candidate to the Second Interview?"} name={`${firstInterview.firstname} ${firstInterview.lastname}`} department={firstInterview.department} school={firstInterview.school}/>
             <StudentModal id="second-interview" title={"Do you want to hire this candidates?"} name={`${secondInterview.firstname} ${secondInterview.lastname}`} department={secondInterview.department} school={secondInterview.school}/>
