@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default (props) => {
-    const {showLeft, showRight} = props;
-    const showLeftElem = showLeft ? <i className="medium material-icons hide-icons">{props.leftArrow}</i> : "";
-    const showRightElem = showRight ? <i className="tiny material-icons hide-icons">{props.rightArrow}</i> : "";
+    const {showLeft, showRight, updateStatus, studentId, status} = props;
+    const showLeftElem = showLeft ? <i className="medium material-icons hide-icons" onClick={() => updateStatus(studentId, status, -1)}>{props.leftArrow}</i> : "";
+    const showRightElem = showRight ? <i className="tiny material-icons hide-icons" onClick={() => updateStatus(studentId, status, 1)}>{props.rightArrow}</i> : "";
 
     return(
         <div className="name-options-container">
