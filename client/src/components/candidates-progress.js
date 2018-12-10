@@ -16,6 +16,8 @@ class CandidateProgress extends Component{
             acceptedCandidates: [],
         }
         this.candidatesToScreen = this.candidatesToScreen.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
+        this.getPoolInfo = this.getPoolInfo.bind(this);
     }
     componentWillMount(){
         this.props.switchNav();
@@ -67,40 +69,78 @@ class CandidateProgress extends Component{
         });
         showElement("accepted-candidates");
     }
+
+    async updateStatus(studentId, currentStatus, statusAction){
+        var query = {
+            'id' : studentId,
+            'current-status' : currentStatus,
+            'status-action' : statusAction
+        }
+        try {
+            await axios.post('http://localhost:8888/php/update-status.php', query).then(response => {
+                console.log("this is the response from update status: ", response);
+                if(response.data.success){
+                    this.getPoolInfo();
+                } else {
+                    console.log("Failed at updating data", response.data.error);
+                }
+            });
+        }
+        catch (err) {
+            console.log("this is the error if never reach server: ", err);
+        }
+    }
     //axio call 
     //make sure to send in the ID that will grab the candidate by ID and change the status
 
     render(){
         const {candidate, firstInterview, secondInterview, acceptedCandidates} = this.state;
         // const {firstname, lastname, essay1, essay2, school, department} = candidate;
-        const candidates = this.state.candidate.map((item, index)=>{
-            const {firstname, lastname, id} = item;
-            const lastnameInitial = this.grabLastNameInitial(lastname);
-            return(
-                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next"/>
-            )
-        })
-        const candidatesRound1 = this.state.firstInterview.map((item, index)=>{
-            const {firstname, lastname, id} = item;
-            const lastnameInitial = this.grabLastNameInitial(lastname);
-            return(
-                <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
-            )
-        })
-        const candidatesRound2 = this.state.secondInterview.map((item, index)=>{
-            const {firstname, lastname, id} = item;
-            const lastnameInitial = this.grabLastNameInitial(lastname);
-            return(
-                <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
-            )
-        })
-        const acceptedCandidatesFinal = this.state.acceptedCandidates.map((item, index)=>{
-            const {firstname, lastname, id} = item;
-            const lastnameInitial = this.grabLastNameInitial(lastname);
-            return(
-                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="" leftArrow="navigate_before"/>
-            )
-        })
+
+        var candidates;
+        if(this.state.candidate){
+            candidates = this.state.candidate.map((item, index)=>{
+                const {firstname, lastname, id, status} = item;
+                const lastnameInitial = this.grabLastNameInitial(lastname);
+                return(
+                  <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                )
+            })
+        }
+
+        var candidatesRound1;
+        if(this.state.firstInterview){
+            candidatesRound1 = this.state.firstInterview.map((item, index)=>{
+                const {firstname, lastname, id, status} = item;
+                const lastnameInitial = this.grabLastNameInitial(lastname);
+                return(
+                  <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                )
+            })
+        }
+
+        var candidatesRound2;
+        if(this.state.secondInterview){
+            candidatesRound2 = this.state.secondInterview.map((item, index)=>{
+                const {firstname, lastname, id, status} = item;
+                const lastnameInitial = this.grabLastNameInitial(lastname);
+                return(
+                  <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                )
+            })
+        }
+
+        var acceptedCandidatesFinal;
+        if(this.state.acceptedCandidates){
+            acceptedCandidatesFinal = this.state.acceptedCandidates.map((item, index)=>{
+                const {firstname, lastname, id, status} = item;
+                const lastnameInitial = this.grabLastNameInitial(lastname);
+                return(
+                  <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                )
+            })
+        }
+
         return(
             <div className="swimming-lanes">
             {/* <StudentModal id="candidates-to-screen" title={"Are you sure you want to send this candidate to the First Interview?"} name={`${firstname} ${lastname}`} department={department} school={school}/>
