@@ -103,7 +103,7 @@ class CandidateProgress extends Component{
                 const {firstname, lastname, id, status} = item;
                 const lastnameInitial = this.grabLastNameInitial(lastname);
                 return(
-                    <NameOptions addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                  <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
                 )
             })
         }
@@ -114,7 +114,7 @@ class CandidateProgress extends Component{
                 const {firstname, lastname, id, status} = item;
                 const lastnameInitial = this.grabLastNameInitial(lastname);
                 return(
-                    <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                  <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
                 )
             })
         }
@@ -125,7 +125,7 @@ class CandidateProgress extends Component{
                 const {firstname, lastname, id, status} = item;
                 const lastnameInitial = this.grabLastNameInitial(lastname);
                 return(
-                    <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                  <NameOptions addClass="waves-effect waves-light blue btn candidate-button-progress interview1Button" addInfoClass="waves-effect blue lighten-1 interview1Info" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
                 )
             })
         }
@@ -136,31 +136,31 @@ class CandidateProgress extends Component{
                 const {firstname, lastname, id, status} = item;
                 const lastnameInitial = this.grabLastNameInitial(lastname);
                 return(
-                    <NameOptions addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                  <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="" leftArrow="navigate_before" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
                 )
             })
         }
 
         return(
-            <div className="container swimming-lanes">
+            <div className="swimming-lanes">
             {/* <StudentModal id="candidates-to-screen" title={"Are you sure you want to send this candidate to the First Interview?"} name={`${firstname} ${lastname}`} department={department} school={school}/>
             <StudentModal id="first-interview" title={"Are you sure you want to send this candidate to the Second Interview?"} name={`${firstInterview.firstname} ${firstInterview.lastname}`} department={firstInterview.department} school={firstInterview.school}/>
             <StudentModal id="second-interview" title={"Do you want to hire this candidates?"} name={`${secondInterview.firstname} ${secondInterview.lastname}`} department={secondInterview.department} school={secondInterview.school}/>
             <StudentModal id="accepted-candidates" title={"Hired"} name={`${acceptedCandidates.firstname} ${acceptedCandidates.lastname}`} department={acceptedCandidates.department} school={acceptedCandidates.school}/> */}
-                <div className="row">
-                    <div className="col s12 lanes-title">
-                        <div className="col s3 lanes">Potential Employees <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Interview 1 <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Interview 2 <div className="divider"></div> </div>
-                        <div className="col s3 lanes">Hired <div className="divider"></div> </div>
+                {/* <div className="row"> */}
+                    <div className="lanes-title">
+                        <div className="lanes">Potential Employees <div className="divider"></div> </div>
+                        <div className="lanes">Interview 1 <div className="divider"></div> </div>
+                        <div className="lanes">Interview 2 <div className="divider"></div> </div>
+                        <div className="lanes">Hired <div className="divider"></div> </div>
                     </div>
-                    <div className="col s12 candidate-lanes">
-                        <div className="col s3 lanes potential">{candidates}</div>
-                        <div className="col s3 lanes potential">{candidatesRound1}</div>
-                        <div className="col s3 lanes potential">{candidatesRound2}</div>
-                        <div className="col s3 lanes potential">{acceptedCandidatesFinal}</div>
+                    <div className="candidate-lanes">
+                        <div className="lanes potential">{candidates}</div>
+                        <div className="lanes potential">{candidatesRound1}</div>
+                        <div className="lanes potential">{candidatesRound2}</div>
+                        <div className="clanes potential">{acceptedCandidatesFinal}</div>
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         )
     }
