@@ -77,7 +77,7 @@ class CandidateProgress extends Component{
             const {firstname, lastname, id} = item;
             const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="navigate_before" rightArrow="navigate_next"/>
+                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next"/>
             )
         })
         const candidatesRound1 = this.state.firstInterview.map((item, index)=>{
@@ -98,7 +98,7 @@ class CandidateProgress extends Component{
             const {firstname, lastname, id} = item;
             const lastnameInitial = this.grabLastNameInitial(lastname);
             return(
-                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="navigate_next" leftArrow="navigate_before"/>
+                <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light green btn candidate-button-progress" addInfoClass="waves-effect green lighten-1 hiredInfo" showLeft={true} showRight={true} fullName={`${firstname} ${lastnameInitial}`} rightArrow="" leftArrow="navigate_before"/>
             )
         })
         return(
