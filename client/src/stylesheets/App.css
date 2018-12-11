@@ -398,9 +398,12 @@
 .name-options-container:hover .name-info-option{
   display: inline-block;
 }
+.align-first{
+  margin-left: -15%;
+}
 /* .interview1Info{
   margin-left: 20%;
 } */
-/* .hiredInfo{
-  margin-left: 30%;
-} */
+.hiredInfo{
+  margin-left: 19%;
+}

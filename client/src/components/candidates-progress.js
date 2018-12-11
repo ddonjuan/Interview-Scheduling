@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import StudentModal from './helpers/student-modal';
 import { showElement } from './helpers/handle-input-helper';
 import NameOptions from './helpers/progress-name-options';
 import axios from 'axios';
@@ -95,15 +94,16 @@ class CandidateProgress extends Component{
 
     render(){
         const {candidate, firstInterview, secondInterview, acceptedCandidates} = this.state;
-        // const {firstname, lastname, essay1, essay2, school, department} = candidate;
+        console.log("THIS IS THE CANDIDATE: ", candidate);
 
         var candidates;
         if(this.state.candidate){
             candidates = this.state.candidate.map((item, index)=>{
+                console.log("this is the item: ", item);
                 const {firstname, lastname, id, status} = item;
                 const lastnameInitial = this.grabLastNameInitial(lastname);
                 return(
-                  <NameOptions hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
+                  <NameOptions candidateInfo={item} id="newID" hideArrow="hide-arrow" addClass="waves-effect waves-light orange btn candidate-button-progress" addInfoClass="waves-effect orange lighten-1 align-first" showRight={true} showLeft={true} fullName={`${firstname} ${lastnameInitial}`} leftArrow="" rightArrow="navigate_next" getPoolInfo={this.getPoolInfo} updateStatus={this.updateStatus} studentId={id} status={status}/>
                 )
             })
         }
