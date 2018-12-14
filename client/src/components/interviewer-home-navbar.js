@@ -10,7 +10,7 @@ class InterviewHomeNavbar extends Component{
         return (
             <nav className="blue header">
                 <div className="nav-wrapper">
-                    <Link to="/interviewer-homepage" className="home-nav-logo">Allergan USC</Link>
+                    <Link to="/interviewer-homepage" className="home-nav-logo">INTRVWS</Link>
     
                     <ul className="right nav-items">
                         <li>
