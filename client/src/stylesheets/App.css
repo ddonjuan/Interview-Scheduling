@@ -150,8 +150,8 @@
   /* border: 1px solid black; */
   height: 95%;
   width: 97%;
-  margin: 0 auto;
-  margin-top: 1.2%;
+  /* margin: 0 auto;
+  margin-top: 1.2%; */
 }
 /* .home-info-container{
   padding:
@@ -276,7 +276,9 @@
 }
 .dropdown-navlist{
   position: absolute;
+  z-index: 2;
   display: none;
+
   color: white;
   width: 16%;
   right: 0%;

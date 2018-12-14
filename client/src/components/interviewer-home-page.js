@@ -216,7 +216,7 @@ class InterviewerHomePage extends Component {
     }
     defaultCandidateDisplay(candidates){
         //have to make flags that detect when none of the filters have been selected and when they are at default
-        //that way it doesn't keep going back to the first element everytime you click on another element twice
+        //that way it doesn't keep going back to 6572959129 the first element everytime you click on another element twice
         candidates.map((item, index, array)=>{
                 const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
                 document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
