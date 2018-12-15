@@ -102,6 +102,7 @@ class CandidateProgress extends Component{
 
     render(){
         const {candidate, firstInterview, secondInterview, acceptedCandidates, candidateModalInfo} = this.state;
+        console.log("candidate modal info: ", candidateModalInfo);
         var candidates;
         if(this.state.candidate){
             candidates = this.state.candidate.map((item, index)=>{
@@ -147,7 +148,7 @@ class CandidateProgress extends Component{
         }
         return(
             <div className="swimming-lanes">
-                <StudentModal title="Student Modal" id="newID" name={`${candidateModalInfo.firstname} ${candidateModalInfo.lastname}`} department="poop" school="RTP" id="newID" />
+                <StudentModal data-id={candidateModalInfo.id} cv={candidateModalInfo.cv} name={`${candidateModalInfo.firstname} ${candidateModalInfo.lastname}`} department={candidateModalInfo.interest} school={candidateModalInfo.school} essay1={candidateModalInfo.essay1} essay2={candidateModalInfo.essay2} phone={candidateModalInfo.phone} email={candidateModalInfo.email} id="newID" />
                     <div className="lanes-title">
                         <div className="lanes">Potential Employees <div className="divider"></div> </div>
                         <div className="lanes">Interview 1 <div className="divider"></div> </div>

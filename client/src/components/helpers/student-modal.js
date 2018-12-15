@@ -1,17 +1,23 @@
 import React from 'react';
-import {showElement} from '../helpers/handle-input-helper';
+import { showElement } from '../helpers/handle-input-helper';
 
 export default (props) => {
     return (
-        <div className={`container modal-container-custom ${props.id} hidden`}>
+        <div onClick={() => { showElement(`${props.id}`) }} className={`container modal-container-custom ${props.id} hidden`}>
             <div className="z-depth-4 modal-content-custom">
-                <h4>{props.title}</h4>
-                <h5 id="modal-name">{props.name}</h5>
-                <h5 id="modal-department">{props.department}</h5>
-                <h5 id="modal-school">{props.school}</h5>
+            <i class="tiny material-icons right close-modal">close</i>
+                <div className="candidate-info-container">
+                    <h4>{props.name}</h4>
+                    <h5 id="modal-name">School: {props.school}</h5>
+                    <h5 id="modal-department">Department: {props.department}</h5>
+                    <h5>Email: {props.email}</h5>
+                    <h5>Phone: {props.phone}</h5>
+                    <h5 className="resume-modal">Resume: <i className="tiny material-icons resume-icon"><a target="_blank" href={props.cv}>launch</a></i></h5>
+
+                </div>
+
                 <div className="modal-footer-custom">
-                    <button onClick={()=>{showElement(`${props.id}`)}} className="waves-effect waves-light red btn">Cancel</button>
-                    <button onClick={()=>{props.submit()}}className="waves-effect waves-light btn">Confirm</button>
+                    <button  className="waves-effect waves-light red btn">Close</button>
                 </div>
             </div>
         </div>

@@ -107,20 +107,21 @@
   width: 60%;
   height: 60%;
   border: 1px solid black;
-  margin: 12%;
-  margin-left: 23%;
+  margin: 9%;
+  margin-left: 20%;
 }
-.modal-content-custom h4, h5{
+.modal-content-custom h{
   margin: 5%;
 }
 .modal-footer-custom{
   width: 100%;
   height: 10%;
-  margin: 8%;
-  margin-left: 34%;
+  /* margin: 8%;
+  margin-left: 34%; */
 }
 .modal-footer-custom button{
   margin: 2%;
+  margin-left: 46%;
 }
 
 /* Nav Logo */
@@ -408,4 +409,22 @@
 } */
 .hiredInfo{
   margin-left: 19%;
+}
+.candidate-info-container h5{
+  margin-left: .5%;
+}
+.candidate-info-container{
+  width: 100%;
+  margin-left: 10%;
+  margin-top: 7%;
+
+}
+.close-modal{
+  margin-right: 1% !important;
+}
+.resume-icon{
+  font-size: 25px !important;
+}
+.resume-modal{
+  margin-top: 0;
 }
