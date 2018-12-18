@@ -193,17 +193,15 @@ class InterviewerHomePage extends Component {
     search(candidateList){
         const {toggleSearchBar, search} = this.state;
         var searchLowerCase = '';
-        var searchLowerCaseArr = [];
         searchLowerCase += search.toLowerCase();
         if(toggleSearchBar && search !== ''){
             var searchArr = [];
             candidateList.map((item, index)=>{
-                searchLowerCaseArr.push(`${item.firstname.toLowerCase()} ${item.lastname.toLowerCase()}`, index);
-                if(item.firstname.indexOf(searchLowerCase) > -1){
+                var fullname = `${item.firstname.toLowerCase()} ${item.lastname.toLowerCase()}`;
+                if(fullname.indexOf(searchLowerCase)  !== -1){
                     searchArr.push(item);
                 }
             });
-            console.log("this is the searchLowerCase: ", searchLowerCaseArr, searchArr)
             return searchArr;
         }
         return false;
