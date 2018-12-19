@@ -179,8 +179,10 @@ class InterviewerHomePage extends Component {
         }
         this.setState({
             toggleSearchBar: true,
-            isSearch: true
+            isSearch: true,
+            search: ''
         });
+
     }
     displayCandidateInfo(item, index, event) {
         this.setState({
@@ -255,9 +257,11 @@ class InterviewerHomePage extends Component {
         const finalDisplay = searchCandidates ? searchCandidates : showArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = finalDisplay.map((item, index, arr) => {
-            const { firstname, lastname } = item;
+            const { firstname, lastname, status } = item;
+            const progressPin = status !== 0 ? <div className="progress-pin"><div className="dot-status"></div><span className="progress-dot-text">In Progress</span></div> : "";
                 return (
                     <div onClick={() => { this.displayCandidateInfo(item, index)}} className="names" id={item.id} key={index}>
+                        {progressPin}
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
