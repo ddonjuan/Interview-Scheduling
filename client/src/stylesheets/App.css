@@ -193,6 +193,9 @@
 .names:hover{
   background-color: rgba(0,0,0,.4);
 }
+.highlight-names{
+  background-color: rgba(0,0,0,.4);
+}
 .info-header{
   margin-bottom: 0;
 }
@@ -223,6 +226,7 @@
 .dot-status{
   display: inline-block;
   background-color: orange;
+  filter: brightness(110%);
   margin-left: 8%;
   width:10px;
   height: 10px;
@@ -394,6 +398,9 @@
   color:white; 
   width: 40%;
 }
+/* .move-down{
+  display: block;
+} */
 .material-icons{
   position:relative;
   cursor: pointer;
@@ -439,4 +446,7 @@
   width: 26%;
   position: absolute;
   left: 0%;
+}
+.together{
+  display:inline-block;
 }

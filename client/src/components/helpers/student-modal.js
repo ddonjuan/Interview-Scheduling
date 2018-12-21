@@ -17,7 +17,8 @@ export default (props) => {
                 </div>
 
                 <div className="modal-footer-custom">
-                    <button  className="waves-effect waves-light red btn">Close</button>
+                    <button  className="waves-effect waves-light orange lighten-2 btn together">Close </button>
+                    <button className="waves-effect waves-light red btn together">Reject</button>   
                 </div>
             </div>
         </div>
