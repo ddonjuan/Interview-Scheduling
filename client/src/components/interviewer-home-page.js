@@ -185,12 +185,22 @@ class InterviewerHomePage extends Component {
 
     }
     displayCandidateInfo(item, index, event) {
+        console.log("this is the item in displayCandidateInfo: ", item);
+        this.candidateNameHighlight(item.id);
         this.setState({
             candidateInfo: item,
             candidateIndex: index
         });
     }
-
+    candidateNameHighlight(id){
+        var names = document.getElementsByClassName("names");
+        for(var namesIndex = 0; namesIndex < names.length; namesIndex++){
+                names[namesIndex].classList.remove("highlight-names");
+        }
+        var newElemID = document.getElementById(id);
+        console.log("this is the newElemID in candidateHighlight method: ", newElemID);
+        document.getElementById(id).classList.add("highlight-names");
+    }
 
     search(candidateList){
         const {toggleSearchBar, search} = this.state;
@@ -216,15 +226,20 @@ class InterviewerHomePage extends Component {
     }
     defaultCandidateDisplay(candidates){
         //have to make flags that detect when none of the filters have been selected and when they are at default
-        //that way it doesn't keep going back to 6572959129 the first element everytime you click on another element twice
+        //that way it doesn't keep going back to the first element everytime you click on another element twice
+        console.log("this is the container in the first index: ", candidates[0]);
+
+
         candidates.map((item, index, array)=>{
                 const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
+
                 document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
                 document.getElementsByClassName("school-name")[0].innerHTML = school;
                 document.getElementsByClassName("function-name")[0].innerHTML = interest;
-                document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
+                // document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
                 document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
                 document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
+
             return;
         });
     }

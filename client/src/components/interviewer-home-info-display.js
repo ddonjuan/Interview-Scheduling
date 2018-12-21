@@ -35,7 +35,7 @@ class InterviewerHomeInfoDisplay extends Component {
         // console.log("this is the caniddate info in the home info display $*$*$*$*: ", showArr);
         const {firstname, lastname, status, school, essay1, essay2, interest, id} = candidateInfo;
         const errorCandidates = displayCandidates.length === 0 ? <div className="no-candidates"> <div>There are no candidates to display</div><button onClick={()=>{resetCandidateList()}} className="waves-effect waves-light blue btn-large">Reset Candidates List</button> </div> : displayCandidates;
-        const interviewButton = status < 1 ? <button id={id} key={id} onClick={() => this.updateStatus(id, status, 1)} className="waves-effect waves-light blue btn-large interview-button">Interview</button> : <button id={id} key={id} className="grey btn-large interview-button">Interview</button> ;
+        const interviewButton = status < 1 ? <button id={id} key={id} onClick={() => this.updateStatus(id, status, 1)} className="waves-effect waves-light blue btn-large interview-button">Interview</button> : <button id={id} key={id} className="disabled btn-large interview-button">In Progress</button> ;
         // if(id !== undefined){
         //     document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
 
