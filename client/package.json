@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
-    "firebase": "^5.5.8",
+    "firebase": "^5.7.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
