@@ -16,6 +16,9 @@ class DropdownNavList extends Component{
                     <Link to="/interviewer-signup" className="dropdown-link">Add User</Link>
                     <li className="divider" tabindex="-1"></li>
                     <Link to="/add-candidate" className="dropdown-link">Add Candidate</Link>
+                    <li className="divider" tabindex="-1"></li>
+                    <Link to="/interviewer-homepage" className="dropdown-link">Sign Out</Link>
+
                 </ul>
             </div>
         )

@@ -225,15 +225,18 @@
 
 .dot-status{
   display: inline-block;
-  background-color: orange;
+  background-color: rgba(230, 150, 2, 0.897);
+  box-shadow: -2px 4px 40px 10px rgb(238, 132, 11);
   filter: brightness(110%);
   margin-left: 8%;
-  width:10px;
-  height: 10px;
+  width:8px;
+  height: 8px;
+  /* border: 1px solid black; */
   border-radius: 50%;
 }
 .progress-dot-text{
   font-size: 10px;
+  margin-left: 12%;
 }
 .name-backgroundcolor{
   background-color: rgba(0,0,0,.5);

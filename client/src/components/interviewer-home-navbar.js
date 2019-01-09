@@ -20,6 +20,9 @@ class InterviewHomeNavbar extends Component{
                             <Link to="candidate-progress">Potential Employees</Link>
                         </li>
                         <li>
+                            <Link to="message-board">Message Board</Link>
+                        </li>
+                        <li>
                             <div onClick={()=>{this.props.toggleDropDownNav()}} className="dropdown-trigger" data-target="dropdown1"><i className="material-icons icon">person</i></div>
                         </li>
                     </ul>
