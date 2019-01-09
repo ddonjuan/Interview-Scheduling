@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InterviewerHomeSortOptions from './interviewer-home-sort-options';
 import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
+import MessageBoard from './message-board';
 import DropdownNavList from './dropdown-navlist';
 import Loader from './loader.js';
 import axios from 'axios';
@@ -229,19 +230,20 @@ class InterviewerHomePage extends Component {
         //that way it doesn't keep going back to the first element everytime you click on another element twice
         console.log("this is the container in the first index: ", candidates[0]);
 
+            candidates.map((item, index, array)=>{
+                // console.log("this is the default display at item [0]: ", item);
+                    const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
+    
+                    document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
+                    document.getElementsByClassName("school-name")[0].innerHTML = school;
+                    document.getElementsByClassName("function-name")[0].innerHTML = interest;
+                    // document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
+                    document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
+                    document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
+    
+                return;
+            });
 
-        candidates.map((item, index, array)=>{
-                const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
-
-                document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
-                document.getElementsByClassName("school-name")[0].innerHTML = school;
-                document.getElementsByClassName("function-name")[0].innerHTML = interest;
-                // document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
-                document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
-                document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
-
-            return;
-        });
     }
 
     resetCandidateList() {
@@ -264,6 +266,7 @@ class InterviewerHomePage extends Component {
         return;
     }
     render() {
+        var flag = 0;
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search, showLoader} = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);

@@ -8,6 +8,7 @@ import InterviewerHomeNavbar from './interviewer-home-navbar';
 import InterviewerHomePage from './interviewer-home-page';
 import AddCandidate from './add-candidate';
 import CandidateProgress from './candidates-progress';
+import MessageBoard from './message-board';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../stylesheets/App.css';
 import DropdownNavList from './dropdown-navlist';
@@ -83,6 +84,7 @@ class App extends Component {
         <Route path="/add-candidate" render={(props)=><AddCandidate switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/interviewer-info" component={InterviewerInfo} />
         <Route path="/candidate-progress" render={(props)=> <CandidateProgress switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
+        <Route path="/message-board" render={(props)=> <MessageBoard switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
         <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/schedule" component={Schedule}/>
       </div>

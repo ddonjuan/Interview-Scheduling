@@ -1,0 +1,31 @@
+.message-board-container{
+    border: 1px solid black;
+    overflow-y: hidden;
+    width: 100%;
+    height: 85%;
+    margin: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+.todo-list, .messages-container, .users-online{
+    border: 1px solid black;
+    display: inline-block;
+    width: 34.5%;
+    height:100%;
+}
+.messages-display{
+    height: 90%;
+}
+.input-container{
+    width: 100%;
+    height: 10%;
+    border: 1px solid black;
+}
+.message-input-box{
+    width: 15%;
+    height: 20%;
+}
+.send-message{
+    width: 20%;
+    height: 20%;
+} 
