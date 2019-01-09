@@ -8,7 +8,7 @@ class InterviewHomeNavbar extends Component{
     }
     render(){
         return (
-            <nav className="blue header">
+            <nav className="header">
                 <div className="nav-wrapper">
                     <Link to="/interviewer-homepage" className="home-nav-logo">INTRVWS</Link>
     
@@ -26,6 +26,7 @@ class InterviewHomeNavbar extends Component{
                             <div onClick={()=>{this.props.toggleDropDownNav()}} className="dropdown-trigger" data-target="dropdown1"><i className="material-icons icon">person</i></div>
                         </li>
                     </ul>
+
                 </div>
             </nav>
         )
