@@ -30,9 +30,9 @@ class MessageBoard extends Component {
         return;
     }
     hideMessageBoard(){
-        document.getElementsByClassName("message-board-container")[0].classList.remove("full-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.toggle("full-message-container");
         document.getElementsByClassName("message-board-container")[0].classList.remove("close-message-container");
-        document.getElementsByClassName("message-board-container")[0].classList.add("hide-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.toggle("hide-message-container");
     }
     closeMessageBoard(){
         document.getElementsByClassName("message-board-container")[0].classList.remove("full-message-container");
