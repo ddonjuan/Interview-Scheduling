@@ -154,6 +154,7 @@ ion-icon {
 .home-nav-logo {
 	font-size: 2.5em;
 	margin-left: 4%;
+	margin-top: 5%;
 	color: #6199ef;
 	display: inline-block;
 	vertical-align: top;
@@ -199,7 +200,7 @@ nav {
 	padding: 0 5%;
 	line-height: 50px;
 	vertical-align: top;
-	margin-right: 5%;
+	margin-right: 2%;
 }
 
 .nav-button a {
@@ -223,25 +224,31 @@ nav {
 	/* margin: 0 auto;
   margin-top: 1.2%; */
 }
-
+/* .home-info-container{
+	border: 1px solid black;
+} */
 .names-container,
 .info-container {
-	border: 1px solid black;
+	border: .5px solid rgba(0,0,0,.95);
 	height: 70vh;
 	overflow-y: scroll;
 }
 
-.info-container {
+.names-container {
 	border-left: none;
 }
 
 .names-container {
 	padding: 0 !important;
+	border-right: none;
 
 }
 
 .names {
-	border: 1px solid black;
+	border: .5px solid rgba(0,0,0,.9);
+	border-right: none;
+	border-radius: 1%;
+	margin-bottom: .16%;
 	position: relative;
 	height: 20%;
 	font-size: 1.4em;
@@ -325,6 +332,7 @@ nav {
 .material-icons {
 	margin-top: 1.9%;
 	font-size: 2.6em !important;
+	line-height: 48px !important;
 	cursor: default;
 }
 

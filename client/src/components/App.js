@@ -77,6 +77,7 @@ class App extends Component {
     return (
       <div className="app">
         {header}
+        <MessageBoard/>
         <DropdownNavList showNavDropDown={this.state.showNavDropDown}/>
         {/* <Route exact path="/" component={InterviewerLandingPage} /> */}
         <Route exact path="/" render={(props)=> <InterviewerLogin {...props} switchNav={this.toggleNavbar}/>} />
@@ -84,7 +85,7 @@ class App extends Component {
         <Route path="/add-candidate" render={(props)=><AddCandidate switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/interviewer-info" component={InterviewerInfo} />
         <Route path="/candidate-progress" render={(props)=> <CandidateProgress switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
-        <Route path="/message-board" render={(props)=> <MessageBoard switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
+        {/* <Route path="/message-board" render={(props)=> <MessageBoard switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>  */}
         <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/schedule" component={Schedule}/>
       </div>
