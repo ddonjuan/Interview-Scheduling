@@ -10,10 +10,10 @@ class MessageBoard extends Component {
         }
         this.handleMessageInput = this.handleMessageInput.bind(this);
     }
-    componentWillMount() {
-        this.props.switchNav();
-        this.props.hideDropDown();
-    }
+    // componentWillMount() {
+    //     this.props.switchNav();
+    //     this.props.hideDropDown();
+    // }
     handleMessageInput(event) {
         event.preventDefault();
         const {messagesContainer} = this.state;
@@ -29,6 +29,16 @@ class MessageBoard extends Component {
         }
         return;
     }
+    hideMessageBoard(){
+        document.getElementsByClassName("message-board-container")[0].classList.remove("full-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.remove("close-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.add("hide-message-container");
+    }
+    closeMessageBoard(){
+        document.getElementsByClassName("message-board-container")[0].classList.remove("full-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.remove("hide-message-container");
+        document.getElementsByClassName("message-board-container")[0].classList.add("close-message-container");
+    }
     render() {
         const {messages, messagesContainer} = this.state;
         var displayMessages = messagesContainer.map((item, index)=>{
@@ -38,24 +48,28 @@ class MessageBoard extends Component {
                 </div>
             )
         })
-        console.log("this is the messages container: ", messages, messagesContainer);
         return (
             <div className="message-board-container">
-                <div className="todo-list">This is the todo list</div>
+            <div className="close-message-container">
+                <span className="left">Messages</span>
+                <i onClick={this.closeMessageBoard} className="tiny close-message-window right material-icons">highlight_off</i>
+                <i onClick={this.hideMessageBoard} className="tiny close-message-window right material-icons">remove</i>
+
+            </div>
                 <div className="messages-container">
                     <div className="messages-display">{displayMessages}</div>
+                    <div className="divider"></div>
                     <div className="input-container">
                         <div className="row">
-                            <form onSubmit={this.handleMessageInput} action="" className="col s12">
+                            <form onSubmit={this.handleMessageInput} action="" className="col s12 form-message">
                                 <input value={messages} 
                                 onChange={event => {
-								this.setState({ messages: event.target.value });}} type="text" className="validate col s8" />
-                                <button onkeypress={this.enterKey} className="col s4 waves-effect btn">Send</button>
+								this.setState({ messages: event.target.value });}} type="text" className="validate col s8 message-input-box" />
+                                <button onkeypress={this.enterKey} className="col s4 waves-effect btn message-send">Send</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div className="users-online">Users online</div>
             </div>
         )
     }

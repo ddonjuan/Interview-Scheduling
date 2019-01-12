@@ -1,31 +1,79 @@
 .message-board-container{
     border: 1px solid black;
     overflow-y: hidden;
-    width: 100%;
-    height: 85%;
+    width: 26%;
+    height: 59%;
     margin: none;
-    display: flex;
-    justify-content: space-evenly;
+    position: absolute;
+    z-index: 2;
+    background: white;
+    transform: translateY(145%);
+    right: 2.32%;
 }
-.todo-list, .messages-container, .users-online{
+.messages-container{
     border: 1px solid black;
     display: inline-block;
-    width: 34.5%;
+    width: 100%;
     height:100%;
 }
+.form-message{
+    padding: 0 !important;
+}
 .messages-display{
-    height: 90%;
+    height: 82%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.message-send{
+    margin-top: 1%;
 }
 .input-container{
+    margin-top: 1%;
     width: 100%;
-    height: 10%;
+    height: 20%;
     border: 1px solid black;
+    border-top: none;
+    border-right: none;
 }
 .message-input-box{
-    width: 15%;
+    width: 66% !important;
     height: 20%;
 }
 .send-message{
     width: 20%;
     height: 20%;
 } 
+.message-board-container .material-icons{
+    margin-right: .8% !important;
+    margin: 0 !important;
+    line-height: 24px !important;
+    font-size: 1.63em !important;
+}
+.message-container{
+    border: 1px solid #6199ef;
+    font-size: .9em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 14px;
+    padding: 0 5%;
+    line-height: 35px;
+    vertical-align: top;
+    margin-right: 40%;
+    margin-bottom: 2%;
+}
+.close-message-container{
+    background-color: #6199ef;
+}
+.full-message-container{
+    transition: all 0.2s linear;
+    transform: translateY(46%);
+}
+.hide-message-container{
+    transition: all 0.2s linear;
+    transform: translateY(138%);
+}
+.close-message-container{
+    transition: all 0.2s linear;
+    transform: translateY(145%);
+}
