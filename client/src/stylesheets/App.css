@@ -253,10 +253,12 @@ nav {
 }
 
 .names {
-	border: .5px solid rgba(0,0,0,.9);
+	border-left: .5px solid #6199ef;
 	border-right: none;
+	color:white;
+	background-color: #6199ef;
 	border-radius: 1%;
-	margin-bottom: .16%;
+	margin-bottom: .26%;
 	position: relative;
 	height: 20%;
 	font-size: 1.4em;
@@ -267,11 +269,12 @@ nav {
 }
 
 .names:hover {
-	background-color: rgba(0, 0, 0, .4);
+	background-color: rgba(97, 153, 239, .7);
 }
 
 .highlight-names {
-	background-color: rgba(0, 0, 0, .4);
+	background-color: white;
+	color: #6199ef;
 }
 
 .info-header {
@@ -549,6 +552,11 @@ nav {
 .candidate-info-container h5 {
 	margin-left: .5%;
 }
+.info-container{
+	border-left:none;
+	border-color: rgba(97, 153, 239, 1);
+	color: rgba(97, 153, 239, 1);
+}
 
 .candidate-info-container {
 	width: 100%;
@@ -605,4 +613,12 @@ nav {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url("../assets/images/Allergan_Logo_Tm.png");
+}
+select, .sort-status-option, .sort-name-option, .search-icon{
+	border: none !important;
+	color: #6199ef !important;
+	font-weight: 600;
+}
+.material-icons{
+	margin-top: 1% !important;
 }
