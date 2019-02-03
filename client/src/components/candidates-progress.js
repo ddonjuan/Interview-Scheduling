@@ -27,6 +27,8 @@ class CandidateProgress extends Component{
     }
 
     async getPoolInfo() {
+        this.props.showLoader();
+
         try {
             await axios.get('http://localhost:8888/php/get-swimming-lane.php').then(response => {
                 console.log("this is the response from axio call: ", response);
@@ -37,6 +39,8 @@ class CandidateProgress extends Component{
                     acceptedCandidates: response.data.data[4]
                 });
             });
+            this.props.hideLoader();
+
         }
         catch (err) {
             console.log("this is the error if never reach server: ", err);

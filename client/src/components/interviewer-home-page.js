@@ -3,7 +3,6 @@ import InterviewerHomeSortOptions from './interviewer-home-sort-options';
 import InterviewerHomeInfoDisplay from './interviewer-home-info-display';
 import MessageBoard from './message-board';
 import DropdownNavList from './dropdown-navlist';
-import Loader from './loader.js';
 import axios from 'axios';
 
 class InterviewerHomePage extends Component {
@@ -39,12 +38,14 @@ class InterviewerHomePage extends Component {
 
    async getStudentInfo() {
         try {
+            this.props.showLoader();
             await axios.get('http://localhost:8888/php/get-student-info.php').then(response => {
                 console.log("this is the response from axio call: ", response);
                 this.setState({
                     elementsArr: response.data.data,
                 });
             });
+            this.props.hideLoader();
         }
         catch (err) {
             console.log("this is the error if never reach server: ", err);
@@ -186,7 +187,8 @@ class InterviewerHomePage extends Component {
 
     }
     displayCandidateInfo(item, index, event) {
-        console.log("this is the item in displayCandidateInfo: ", item);
+        var startingId = document.getElementById(item.id);
+        console.log("this is the id in the display Candidate info: ", startingId);
         this.candidateNameHighlight(item.id);
         this.setState({
             candidateInfo: item,
@@ -194,12 +196,12 @@ class InterviewerHomePage extends Component {
         });
     }
     candidateNameHighlight(id){
+        var newElemID = document.getElementById(id);
+
         var names = document.getElementsByClassName("names");
         for(var namesIndex = 0; namesIndex < names.length; namesIndex++){
                 names[namesIndex].classList.remove("highlight-names");
         }
-        var newElemID = document.getElementById(id);
-        console.log("this is the newElemID in candidateHighlight method: ", newElemID);
         document.getElementById(id).classList.add("highlight-names");
     }
 
@@ -266,7 +268,7 @@ class InterviewerHomePage extends Component {
         return;
     }
     render() {
-        var flag = 0;
+        // var flag = 0;
         const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search, showLoader} = this.state;
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);

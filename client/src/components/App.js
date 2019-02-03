@@ -11,6 +11,7 @@ import CandidateProgress from './candidates-progress';
 import MessageBoard from './message-board';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../stylesheets/App.css';
+import Loader from './loader';
 import DropdownNavList from './dropdown-navlist';
 import Schedule from './schedule'
 
@@ -18,31 +19,37 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state={
+      showLoader: false,
       switchNav: false,
       showNavDropDown: false
     }
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleDropDownNav = this.toggleDropDownNav.bind(this);
     this.hideDropDown = this.hideDropDown.bind(this);
+    this.displayLoader = this.displayLoader.bind(this);
+    this.hideLoader = this.hideLoader.bind(this);
+
   }
   componentDidMount(){
     document.body.addEventListener("click", ()=>{
       this.hideDropDown();
     })
   }
-  // componentWillMount(){
-  //   var container = document.getElementsByClassName("container");
-  //   for(var i =0 ; i < container.length; i++){
-  //     container[i].addEventListener('click', function(){
-  //       this.toggleDropDownNav();
-  //     })
-  //   }
-  // }
-  // componentWillMount(){
-  //   document.getElementsByClassName("app")[0].addEventListener("click", function(){
-  //     this.hideDropDown();
-  //   });
-  // }
+  displayLoader(){
+    const {showLoader} = this.state;
+
+    this.setState({
+      showLoader: true
+    });
+  }
+  hideLoader(){
+    const {showLoader} = this.state;
+
+    this.setState({
+      showLoader: false
+    });
+  }
+
   toggleDropDownNav(){
     const {showNavDropDown} = this.state;
     if(showNavDropDown){
@@ -72,10 +79,12 @@ class App extends Component {
 //   render={(props) => <Dashboard {...props} isAuthed={true} />}
 // />
 
-    const {switchNav} = this.state;
+    const {switchNav, showLoader} = this.state;
+    const displayLoader = showLoader ? <Loader/> : "";
     const header = switchNav ? <InterviewerHomeNavbar toggleDropDownNav={this.toggleDropDownNav}/>: <InterviewerLandingHeader/>;
     return (
       <div className="app">
+        {displayLoader}
         {header}
         <MessageBoard/>
         <DropdownNavList showNavDropDown={this.state.showNavDropDown}/>
@@ -84,9 +93,9 @@ class App extends Component {
         <Route path="/interviewer-signup" render={(props)=><InterviewerSignup switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/add-candidate" render={(props)=><AddCandidate switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/interviewer-info" component={InterviewerInfo} />
-        <Route path="/candidate-progress" render={(props)=> <CandidateProgress switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
+        <Route path="/candidate-progress" render={(props)=> <CandidateProgress showLoader={this.displayLoader} hideLoader={this.hideLoader} switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/> 
         {/* <Route path="/message-board" render={(props)=> <MessageBoard switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>  */}
-        <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
+        <Route path="/interviewer-homepage" render={(props)=><InterviewerHomePage showLoader={this.displayLoader} hideLoader={this.hideLoader} switchNav={this.toggleNavbar} hideDropDown={this.hideDropDown}/>}/>
         <Route path="/schedule" component={Schedule}/>
       </div>
     );
