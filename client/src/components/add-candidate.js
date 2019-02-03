@@ -254,15 +254,15 @@ class AddCandidate extends Component {
                     <div className="row">
                         <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={firstname} name="firstname" type="text" labelTitle="First Name" errorMessage="Invalid Input. First name must contain at least one character" />
                         <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={lastname} name="lastname" type="text" labelTitle="Last Name" errorMessage="Invalid Input. Last name must contain at least one character" />
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={phone} name="phone" type="text" labelTitle="Phone Number" errorMessage="Invalid Input. Field must contain a total of 10 digits including area code with the exception of '()' and '-'" />
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={email} name="email" type="email" labelTitle="Email" errorMessage="Invalid Input. Email must contain '@'" />
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={school} name="school" type="text" labelTitle="School" errorMessage="Invalid Input. School must contain at least one character" />
-                        <Input inputClassContainer="s12" handleInputChange={this.handleInputChange} value={yearOfGraduation} name="yearOfGraduation" type="month" labelTitle="Year of Graduation" errorMessage="Invalid. Field must have a date" />
+                        <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={phone} name="phone" type="text" labelTitle="Phone Number" errorMessage="Invalid Input. Field must contain a total of 10 digits including area code with the exception of '()' and '-'" />
+                        <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={email} name="email" type="email" labelTitle="Email" errorMessage="Invalid Input. Email must contain '@'" />
+                        <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={school} name="school" type="text" labelTitle="School" errorMessage="Invalid Input. School must contain at least one character" />
+                        <Input inputClassContainer="s6" handleInputChange={this.handleInputChange} value={yearOfGraduation} name="yearOfGraduation" type="month" labelTitle="Year of Graduation" errorMessage="Invalid. Field must have a date" />
                         <SelectDropDown id="department" name="department" submit={this.handleInputChange} selectTitle="Department" value={['Default', 'Clinical Development', 'Medical Affairs', 'Global Regulatory Affairs', 'Clinical Pharmacology']} selectClasses="col s3 sort-function-option" />
 
                     </div>
                     <div className="row">
-                        <div className="file-field input-field">
+                        <div className="s3 file-field input-field">
                             <label for="btn" className="active">Upload CV/Resume</label>
                             <br />
                             <div className="btn" name="btn">
