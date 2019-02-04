@@ -36,6 +36,16 @@ class InterviewerHomePage extends Component {
         this.props.hideDropDown();
     }
 
+    // componentWillUpdate(){
+    //     const {candidateInfo, } = this.state;
+
+    //     if(candidateInfo.length === 0){
+    //         this.setState({
+
+    //         })
+    //     }
+    // }
+
    async getStudentInfo() {
         try {
             this.props.showLoader();
@@ -186,9 +196,11 @@ class InterviewerHomePage extends Component {
         });
 
     }
-    displayCandidateInfo(item, index, event) {
-        var startingId = document.getElementById(item.id);
-        console.log("this is the id in the display Candidate info: ", startingId);
+    displayCandidateInfo(item, index) {
+        const {candidateInfo} = this.state;
+        if(item.id === candidateInfo.id){
+            return false;
+        }
         this.candidateNameHighlight(item.id);
         this.setState({
             candidateInfo: item,
@@ -196,11 +208,9 @@ class InterviewerHomePage extends Component {
         });
     }
     candidateNameHighlight(id){
-        var newElemID = document.getElementById(id);
-
         var names = document.getElementsByClassName("names");
         for(var namesIndex = 0; namesIndex < names.length; namesIndex++){
-                names[namesIndex].classList.remove("highlight-names");
+            names[namesIndex].classList.remove("highlight-names");
         }
         document.getElementById(id).classList.add("highlight-names");
     }
@@ -228,24 +238,17 @@ class InterviewerHomePage extends Component {
         return true;
     }
     defaultCandidateDisplay(candidates){
-        //have to make flags that detect when none of the filters have been selected and when they are at default
-        //that way it doesn't keep going back to the first element everytime you click on another element twice
-        console.log("this is the container in the first index: ", candidates[0]);
-
             candidates.map((item, index, array)=>{
-                // console.log("this is the default display at item [0]: ", item);
                     const {firstname, lastname, school, status, essay1, essay2, interest, id} = array[0];
-    
-                    document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
-                    document.getElementsByClassName("school-name")[0].innerHTML = school;
-                    document.getElementsByClassName("function-name")[0].innerHTML = interest;
-                    // document.getElementsByClassName("interview-button")[0].setAttribute("id", id);   
-                    document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
-                    document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
-    
-                return;
+                    if(id === item.id){
+                        document.getElementsByClassName("full-name")[0].innerHTML = `${firstname} ${lastname}`;
+                        document.getElementsByClassName("school-name")[0].innerHTML = school;
+                        document.getElementsByClassName("function-name")[0].innerHTML = interest;
+                        document.getElementsByClassName("essay-1-set")[0].innerHTML = essay1;
+                        document.getElementsByClassName("essay-2-set")[0].innerHTML = essay2;
+                        return;
+                    }
             });
-
     }
 
     resetCandidateList() {
@@ -268,8 +271,8 @@ class InterviewerHomePage extends Component {
         return;
     }
     render() {
-        // var flag = 0;
-        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search, showLoader} = this.state;
+        const { elementsArr, department, alphabatize, status, toggleSearchBar, candidateInfo, search, showLoader, firstCandidate} = this.state;
+        console.log("this is the candidate info", candidateInfo);
         this.mainAlphabaticalSort(alphabatize);
         const drop = this.displayByDepartment(department, status);
         const showArr = drop.departmentArr;
@@ -277,22 +280,21 @@ class InterviewerHomePage extends Component {
         const finalDisplay = searchCandidates ? searchCandidates : showArr;
         const showSearchBar = toggleSearchBar ? "showSearch" : "";
         const displayCandidates = finalDisplay.map((item, index, arr) => {
+
             const { firstname, lastname, status } = item;
-            const progressPin = status !== 0 ? <div className="progress-pin"><div className="dot-status"></div><span className="progress-dot-text">In Progress</span></div> : "";
+            const progressPin = status !== "0" ? <div className="progress-pin"><div className="dot-status"></div><span className="progress-dot-text">In Progress</span></div> : "";
                 return (
-                    <div onClick={() => { this.displayCandidateInfo(item, index)}} className="names" id={item.id} key={index}>
+                    <div onClick={() => { this.displayCandidateInfo(item, index, arr)}} className="names" id={item.id} key={index}>
                         {progressPin}
                         <span>{firstname} {lastname}</span>
                     </div>
                 )
         });
-            this.defaultCandidateDisplay(finalDisplay);
             return (
             <div className="container home-container">
                 <div className="row home-inner-container">
-                    {/* <DropdownNavList/> */}
                     <InterviewerHomeSortOptions  elementsArr={elementsArr} handleInputChange={this.handleInputChange} candidateInfo={displayCandidates} showSearchBar={showSearchBar} searchBarToggle={this.searchBarToggle} handleSelectDepartment={this.handleSelectDepartment} />
-                    <InterviewerHomeInfoDisplay  resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} itemNow={this.itemToSwitch}/>
+                    <InterviewerHomeInfoDisplay  finalDisplay={finalDisplay} resetCandidateList={this.resetCandidateList} displayCandidates={displayCandidates} candidateInfo={candidateInfo} itemNow={this.itemToSwitch}/>
                 </div>
             </div>
         )

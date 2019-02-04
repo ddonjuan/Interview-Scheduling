@@ -204,16 +204,17 @@ nav {
 	display: inline-block;
 	height:50px;
 	border: 1px solid #6199ef;
+	color: #6199ef;
 	border-radius: 50px;
 	padding: 0 5%;
 	line-height: 50px;
 	vertical-align: top;
 	margin-right: 2%;
 }
-
-.nav-button a {
+nav a{
 	color: #6199ef;
 }
+
 
 .nav-icon {
 	display: inline-block;
@@ -267,7 +268,9 @@ nav {
 	justify-content: center;
 	align-items: center;
 }
-
+.name-school div{
+	margin: 3%;
+}
 .names:hover {
 	background-color: rgba(97, 153, 239, .7);
 }
@@ -311,8 +314,8 @@ nav {
 
 .dot-status{
   display: inline-block;
-  background-color: rgba(230, 150, 2, 0.897);
-  box-shadow: -2px 4px 40px 10px rgb(238, 132, 11);
+  background-color: rgba(255,255,255, 0.897);
+  box-shadow: -2px 2px 38px 8px white;
   filter: brightness(110%);
   margin-left: 8%;
   width:8px;
@@ -390,7 +393,7 @@ nav {
 	position: absolute;
 	z-index: 2;
 	display: none;
-
+	background-color: #6199ef;
 	color: white;
 	width: 16%;
 	right: 0%;
@@ -399,14 +402,16 @@ nav {
 	text-align: center;
 }
 
+
 .dropdown-navlist li {
-	border: 1px solid black;
+	border: .5px solid white;
 	width: 100%;
 }
 
 .dropdown-link {
 	/* padding: 10%; */
 	margin-left: 5%;
+	margin-bottom: 1% !important;
 	/* padding-right: 10%; */
 	/* padding-left: 1%; */
 	width: 100%;
@@ -442,36 +447,42 @@ nav {
 
 .swimming-lanes {
 	height: 85%;
-	border: 1px solid black;
+	border: 1px solid white;
 }
 
 .candidate-lanes {
-	overflow: scroll;
-	height: 96%;
-	border: 1px solid black;
+	height: 99%;
+	border: 1px solid white;
 	display: flex;
 	justify-content: space-evenly;
 }
 
 .lanes-title {
+	color: #6199ef;
+	background-color: white !important;
+	font-weight: 600;
 	display: flex;
+	overflow-y: hidden;
 	width: 100%;
 	justify-content: space-evenly;
 	text-align: center;
 }
 
 .lanes {
+	/* background-color: #6199ef; */
 	/* border-right: 1px solid black; */
+	overflow-y: scroll;
 	text-align: center;
 	margin: 0 auto;
-	border: 1px solid black;
+	border: 1px solid white;
 	width: 25%;
 }
 
 .clanes {
 	/* border-right: 1px solid black; */
+	/* background-color: #6199ef; */
 	text-align: center;
-	border: 1px solid black;
+	border: 1px solid white;
 	width: 25%;
 }
 
@@ -516,7 +527,21 @@ nav {
 	color: white;
 	width: 40%;
 }
-
+.count h6{
+	margin-top: 14% !important;
+	color: #6199ef;
+	font-weight: 500;
+}
+.nav-button-color{
+	background-color:#6199ef;
+	color: white !important; 
+}
+.nav-button-color a{
+	color: white !important; 
+}
+/* .nav-button < .nav-button-color{
+	background-co
+} */
 /* .move-down{
   display: block;
 } */
@@ -591,7 +616,7 @@ nav {
 	height: 100%;
 	z-index: 3;
 	position: absolute;
-	background-color: rgba(255,255,255,.8);
+	background-color: rgba(255,255,255,.93);
 	border: 1px solid black;
 }
 

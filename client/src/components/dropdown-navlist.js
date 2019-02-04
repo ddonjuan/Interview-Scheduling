@@ -10,7 +10,7 @@ class DropdownNavList extends Component{
         const showNav = showNavDropDown ? 'showNav' : '';
         return(
             <div className="container">
-                <ul className={`dropdown-navlist blue ${showNav}`}>
+                <ul className={`dropdown-navlist ${showNav}`}>
                     <Link to="/interviewer-homepage" className="dropdown-link">Home</Link>
                     <li className="divider" tabindex="-1"></li>
                     <Link to="/interviewer-signup" className="dropdown-link">Add User</Link>
