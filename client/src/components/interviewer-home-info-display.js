@@ -6,6 +6,10 @@ import axios from 'axios';
 class InterviewerHomeInfoDisplay extends Component {
     constructor(props) {
         super(props);
+
+        this.state={
+
+        }
     }
 
     async updateStatus(studentId, currentStatus, statusAction){
@@ -31,9 +35,8 @@ class InterviewerHomeInfoDisplay extends Component {
     }
 
     render() {
-        const { displayCandidates, candidateInfo, resetCandidateList} = this.props;
-        // console.log("this is the caniddate info in the home info display $*$*$*$*: ", showArr);
-        const {firstname, lastname, status, school, essay1, essay2, interest, id} = candidateInfo;
+        const { displayCandidates,resetCandidateList, candidateInfo} = this.props;
+        const {firstname, lastname, status, id, essay1, essay2, school, interest} = candidateInfo;
         const errorCandidates = displayCandidates.length === 0 ? <div className="no-candidates"> <div>There are no candidates to display</div><button onClick={()=>{resetCandidateList()}} className="waves-effect waves-light blue btn-large">Reset Candidates List</button> </div> : displayCandidates;
         const interviewButton = status < 1 ? <button id={id} key={id} onClick={() => this.updateStatus(id, status, 1)} className="waves-effect waves-light blue btn-large interview-button">Interview</button> : <button id={id} key={id} className="disabled btn-large interview-button">In Progress</button> ;
         // if(id !== undefined){
@@ -47,7 +50,7 @@ class InterviewerHomeInfoDisplay extends Component {
                     <div className="col s8 info-container">
                         <div className="row info-header">
                             <div className="col s12">
-                                <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div>
+                                {/* <div className="col s3 pic"><img className="pic-class" src="" alt="" /></div> */}
                                 <div className="col s4 name-school">
                                     <div className="full-name">{`${firstname} ${lastname}`}</div>
                                     <div className="school-name">{school}</div>
